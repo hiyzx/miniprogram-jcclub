@@ -1,12 +1,41 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/pioneer/pioneer",
+    "pages/personal/personal",
+    "pages/logs/logs",
+    "pages/out/out"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#9B9DB1",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/pioneer/pioneer",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home.png",
+        "text": "创业"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "iconPath": "images/icon/my.png",
+        "selectedIconPath": "images/icon/home.png",
+        "text": "我的"
+      }
+    ]
   }
 }

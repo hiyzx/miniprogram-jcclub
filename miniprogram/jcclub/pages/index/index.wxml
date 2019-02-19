@@ -1,13 +1,16 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<view class="swiper-container">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+    <block wx:for="{{imgUrls}}" wx:key="unique">
+      <swiper-item>
+        <image src="{{item}}" class="img" bindtap="swipclick" />
+      </swiper-item>
     </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  </swiper>
 </view>
+<i-cell-group>
+    <view wx:for="{{array}}">
+          <image style='width: 200px; height: 200px; background-color: #eeeeee;'
+          mode="{{item.message}}" src="https://img1.doubanio.com/view/photo/l/public/p2463041948.webp" bindtap='imageClick'></image>
+         <i-cell title="{{item.message}}" is-link url="/pages/personal/personal"></i-cell></view>
+</i-cell-group>
+
