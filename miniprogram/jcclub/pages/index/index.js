@@ -6,31 +6,37 @@ Page({
     interval: 3000,
     duration: 800,
     circular: true,
-    imgUrls: [
-      'https://img1.doubanio.com/view/photo/l/public/p2463041948.webp',
-      'https://img1.doubanio.com/view/photo/l/public/p2463041948.webp',
-      'https://img1.doubanio.com/view/photo/l/public/p2463041948.webp'
-    ],
-    array: [{
-      message: 'foo',
-      clickUrl: 'https://mp.weixin.qq.com/s/o_f5SXIedZASlRG3m_BnAA'
-    }, {
-      message: 'bar',
-      clickUrl: 'https://mp.weixin.qq.com/s/o_f5SXIedZASlRG3m_BnAA'
-    }]
+    imgUrls: [],
+    articles: [],
+    title:""
 
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     wx.request({
-      url: 'http://localhost:8080/carousel', //仅为示例，并非真实的接口地址
+      url: 'http://www.hiyzx.cn:8080/jcclub/carousel', 
       success: function (res) {
-        console.log(res.data)
+        console.log(res.data.data)
+        that.setData({
+          imgUrls:res.data.data
+        })
         
       }
-    })
+    }),
+      wx.request({
+      url: 'http://www.hiyzx.cn:8080/jcclub/article', 
+        success: function (res) {
+          console.log(res.data.data)
+          that.setData({
+            articles: res.data.data
+          })
+          console.log(that.data.articles)
+
+        }
+      })
   },
   //轮播图的切换事件
   swiperChange: function (e) {
@@ -51,9 +57,9 @@ Page({
       url: this.data.links[this.data.swiperCurrent]
     })
   },
-  imageClick:function (url){
+  imageClick:function (event){
     wx.navigateTo({
-      url: '/pages/out/out',
+      url: '/pages/out/out?articleUrl=' + event.currentTarget.dataset.articleurl
     })
   }
 })

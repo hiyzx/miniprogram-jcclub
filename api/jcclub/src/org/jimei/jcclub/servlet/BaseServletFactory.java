@@ -19,6 +19,7 @@ public abstract class BaseServletFactory extends HttpServlet {
      */
     protected static final long serialVersionUID = 1L;
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -37,6 +38,7 @@ public abstract class BaseServletFactory extends HttpServlet {
         pw.close();
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         this.doGet(request, response);

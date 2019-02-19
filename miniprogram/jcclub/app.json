@@ -9,7 +9,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "高校创新赛事对接平台",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

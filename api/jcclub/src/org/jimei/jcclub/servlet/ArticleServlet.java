@@ -12,8 +12,8 @@ import java.util.List;
  * @author yezhaoxing
  * @since 2019/02/19
  */
-@WebServlet("/index")
-public class IndexServlet extends BaseServletFactory {
+@WebServlet("/article")
+public class ArticleServlet extends BaseServletFactory {
 
     @Override
     protected List<Article> dataModel(HttpServletRequest request, HttpServletResponse response) {

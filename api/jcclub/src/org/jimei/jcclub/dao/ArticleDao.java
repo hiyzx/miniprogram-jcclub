@@ -4,6 +4,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang.StringUtils;
 import org.jimei.jcclub.model.po.Article;
+import org.jimei.jcclub.utils.DBUtil;
 
 import java.sql.Connection;
 import java.util.List;
@@ -27,6 +28,8 @@ public class ArticleDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(null,conn);
         }
         return articleList;
     }

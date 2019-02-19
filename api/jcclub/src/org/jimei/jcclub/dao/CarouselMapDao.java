@@ -3,6 +3,7 @@ package org.jimei.jcclub.dao;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.jimei.jcclub.model.po.CarouselMap;
+import org.jimei.jcclub.utils.DBUtil;
 
 import java.sql.Connection;
 import java.util.List;
@@ -20,6 +21,8 @@ public class CarouselMapDao {
             articleList = qr.query(conn, sql, new BeanListHandler<>(CarouselMap.class));
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+	        DBUtil.closeConn(null,conn);
         }
         return articleList;
     }
