@@ -1,3 +1,5 @@
+<button wx:if="{{!hasUserInfo && canIUse && getUserInfoFail}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+
 <!-- 搜索输入框 -->
 <i-panel>
     <i-input value="{{title}}" type="text" placeholder="找人才,找团队,开启创业之旅吧" />
@@ -18,7 +20,7 @@
 
 <!-- 咨询页面 -->
 <i-cell-group>
-    <view wx:for="{{articles}}">
+    <view wx:for="{{articles}}" wx:key="key">
           <image style='width: 300px; height: 200px;' src="{{item.imageUrl}}" bindtap='imageClick' data-articleUrl='{{item.articleUrl}}'></image>
      <i-cell title="{{item.title}}"></i-cell></view>
 </i-cell-group>
