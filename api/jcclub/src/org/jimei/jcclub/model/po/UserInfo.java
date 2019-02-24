@@ -28,7 +28,7 @@ public class UserInfo {
     /**
      * 性别:1男 2女
      */
-    private Byte gender;
+    private Integer gender;
 
     private Date createTime;
 
@@ -64,11 +64,11 @@ public class UserInfo {
         this.avatarUrl = avatarUrl;
     }
 
-    public Byte getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

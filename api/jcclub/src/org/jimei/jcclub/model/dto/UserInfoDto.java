@@ -24,7 +24,7 @@ public class UserInfoDto {
     /**
      * 性别:1男 2女
      */
-    private Byte gender;
+    private Integer gender;
 
 
     public String getOpenid() {
@@ -51,11 +51,11 @@ public class UserInfoDto {
         this.avatarUrl = avatarUrl;
     }
 
-    public Byte getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 }

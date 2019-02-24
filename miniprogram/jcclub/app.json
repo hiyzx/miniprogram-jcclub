@@ -1,9 +1,10 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/pioneer/pioneer",
+    "pages/team/team",
+    "pages/talent/talent",
     "pages/personal/personal",
-    "pages/logs/logs",
+    "pages/personalInfo/personalInfo",
     "pages/out/out"
   ],
   "window":{
@@ -20,21 +21,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home.png",
+        "iconPath": "images/icon/首页.png",
+        "selectedIconPath": "images/icon/首页橙色.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/pioneer/pioneer",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home.png",
-        "text": "创业"
+        "pagePath": "pages/team/team",
+        "iconPath": "images/icon/团队.png",
+        "selectedIconPath": "images/icon/团队橙色.png",
+        "text": "团队库"
+      },
+      {
+        "pagePath": "pages/talent/talent",
+        "iconPath": "images/icon/找人才.png",
+        "selectedIconPath": "images/icon/找人才橙色.png",
+        "text": "人才库"
       },
       {
         "pagePath": "pages/personal/personal",
-        "iconPath": "images/icon/my.png",
-        "selectedIconPath": "images/icon/home.png",
-        "text": "我的"
+        "iconPath": "images/icon/个人中心.png",
+        "selectedIconPath": "images/icon/个人中心橙色.png",
+        "text": "个人中心"
       }
     ]
   }

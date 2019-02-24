@@ -29,6 +29,7 @@ public abstract class BaseServletFactory extends HttpServlet {
             Object object = dataModel(request, response);
             rtn = ReturnVo.success(object);
         } catch (Exception ex) {
+            ex.printStackTrace();
             rtn = BaseReturnVo.fail();
         }
         PrintWriter pw = response.getWriter();

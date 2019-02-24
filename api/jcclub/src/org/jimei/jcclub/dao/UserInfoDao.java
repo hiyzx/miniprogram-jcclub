@@ -13,25 +13,27 @@ import static org.jimei.jcclub.utils.DBUtil.getConn;
 
 public class UserInfoDao {
 
-    public Boolean auth(UserInfoDto userInfoDto) {
-        UserInfo userInfo = this.query(userInfoDto.getOpenid());
+    public Integer auth(UserInfoDto userInfoDto) {
+        UserInfo userInfo = this.query(userInfoDto.getNickName());
         if (userInfo == null) {
             // 新增
-            return this.save(userInfoDto);
+            this.save(userInfoDto);
+            return this.query(userInfoDto.getNickName()).getId();
         } else {
             // 更新
-            return this.update(userInfo.getId(), userInfoDto);
+            this.update(userInfo.getId(), userInfoDto);
+            return userInfo.getId();
         }
 
     }
 
-    public UserInfo query(String openid) {
+    public UserInfo query(String nickName) {
         Connection conn = null;
         UserInfo userInfo = null;
         try {
             conn = getConn();
             QueryRunner qr = new QueryRunner();
-            String sql = "SELECT * FROM user_info WHERE isShow = 1";
+            String sql = String.format("SELECT * FROM user_info WHERE nickName = '%s'", nickName);
             userInfo = qr.query(conn, sql, new BeanHandler<>(UserInfo.class));
         } catch (Exception e) {
             e.printStackTrace();
