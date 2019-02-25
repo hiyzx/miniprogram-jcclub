@@ -27,6 +27,8 @@ public class PersonalServlet extends BaseServletFactory {
             return this.query(request);
         } else if ("save".equals(actionName)) {
             return this.save(request);
+        } else if ("publish".equals(actionName)) {
+            return this.publish(request);
         } else {
             return null;
         }
@@ -44,7 +46,7 @@ public class PersonalServlet extends BaseServletFactory {
     private Object query(HttpServletRequest request) {
         Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
         Talent talent = new TalentDao().query(userInfoId);
-        if(talent == null){
+        if (talent == null) {
             talent = new Talent();
 
         }
@@ -63,6 +65,13 @@ public class PersonalServlet extends BaseServletFactory {
         talentDto.setWorkExperience(parameterMap.get("workExperience")[0]);
         talentDto.setCompetitionExperience(parameterMap.get("competitionExperience")[0]);
         new TalentDao().saveOrUpdate(talentDto);
+        return true;
+    }
+
+    private Boolean publish(HttpServletRequest request) {
+        String userInfoId = request.getParameter("userInfoId");
+        String isPublish = request.getParameter("isPublish");
+        new TalentDao().publish(userInfoId, isPublish);
         return true;
     }
 }

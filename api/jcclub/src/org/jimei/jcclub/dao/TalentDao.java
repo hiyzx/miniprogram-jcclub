@@ -77,4 +77,17 @@ public class TalentDao {
             DBUtil.closeConn(null, conn);
         }
     }
+
+    public void publish(String userInfoId, String isPublish) {
+        Connection conn = getConn();
+        try {
+            QueryRunner qr = new QueryRunner();
+            String sql = "UPDATE talent SET isPublish = ? WHERE userInfoId  = ?";
+            qr.update(conn, sql, userInfoId, isPublish);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(null, conn);
+        }
+    }
 }

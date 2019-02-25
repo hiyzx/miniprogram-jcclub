@@ -22,6 +22,8 @@ public class TalentDto {
 
     private String competitionExperience;
 
+    private Integer isPublish;
+
     public Integer getUserInfoId() {
         return userInfoId;
     }
@@ -84,5 +86,13 @@ public class TalentDto {
 
     public void setCompetitionExperience(String competitionExperience) {
         this.competitionExperience = competitionExperience;
+    }
+
+    public Integer getIsPublish() {
+        return isPublish;
+    }
+
+    public void setIsPublish(Integer isPublish) {
+        this.isPublish = isPublish;
     }
 }

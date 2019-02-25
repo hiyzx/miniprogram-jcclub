@@ -28,6 +28,8 @@ public class Talent {
 
     private Date createTime;
 
+    private Integer isPublish;
+
     public Integer getId() {
         return id;
     }
@@ -106,5 +108,13 @@ public class Talent {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getIsPublish() {
+        return isPublish;
+    }
+
+    public void setIsPublish(Integer isPublish) {
+        this.isPublish = isPublish;
     }
 }
