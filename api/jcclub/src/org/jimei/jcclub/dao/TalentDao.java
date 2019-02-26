@@ -1,15 +1,13 @@
 package org.jimei.jcclub.dao;
 
-import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.jimei.jcclub.model.dto.TalentDto;
 import org.jimei.jcclub.model.po.Talent;
 import org.jimei.jcclub.utils.DBUtil;
 
-import java.sql.Connection;
 import java.util.Date;
-
-import static org.jimei.jcclub.utils.DBUtil.getConn;
+import java.util.List;
 
 /**
  * @author yezhaoxing
@@ -29,65 +27,68 @@ public class TalentDao {
 
     }
 
+    public List<Talent> list() {
+        try {
+            String sql = "SELECT * FROM talent WHERE isPublish = 1";
+            return DBUtil.getQr().query(sql, new BeanListHandler<>(Talent.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public Talent query(Integer userInfoId) {
-        Connection conn = null;
-        Talent talent = null;
         try {
-            conn = getConn();
-            QueryRunner qr = new QueryRunner();
-            String sql = String.format("SELECT * FROM talent WHERE userInfoId = '%s'", userInfoId);
-            talent = qr.query(conn, sql, new BeanHandler<>(Talent.class));
+            String sql = "SELECT * FROM talent WHERE userInfoId = ?";
+            return DBUtil.getQr().query(sql, new BeanHandler<>(Talent.class), userInfoId);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(null, conn);
-        }
-        return talent;
-    }
-
-    private void save(TalentDto talentDto) {
-        Connection conn = getConn();
-        try {
-            QueryRunner qr = new QueryRunner();
-            String sql =
-                    "INSERT INTO talent (userInfoId, name,tel,className,idealPost,type,workExperience,competitionExperience,"
-                            + "createTime) VALUES(?,?,?,?,?,?,?,?,?)";
-            qr.update(conn, sql, talentDto.getUserInfoId(), talentDto.getName(), talentDto.getTel(),
-                    talentDto.getClassName(), talentDto.getIdealPost(), talentDto.getType(),
-                    talentDto.getWorkExperience(), talentDto.getCompetitionExperience(), new Date());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(null, conn);
+            return null;
         }
     }
 
-    private void update(Integer talentId, TalentDto talentDto) {
-        Connection conn = getConn();
+    public Talent queryById(Integer talentId) {
         try {
-            QueryRunner qr = new QueryRunner();
-            String sql = "UPDATE talent SET name = ?, tel = ?,className = ?,idealPost = ? "
-                    + ",type = ?, workExperience = ?,competitionExperience = ? WHERE id = ?";
-            qr.update(conn, sql, talentDto.getName(), talentDto.getTel(), talentDto.getClassName(),
-                    talentDto.getIdealPost(), talentDto.getType(), talentDto.getWorkExperience(),
-                    talentDto.getCompetitionExperience(), talentId);
+            String sql = "SELECT * FROM talent WHERE id = ?";
+            return DBUtil.getQr().query(sql, new BeanHandler<>(Talent.class), talentId);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(null, conn);
+            return null;
         }
     }
 
     public void publish(String userInfoId, String isPublish) {
-        Connection conn = getConn();
         try {
-            QueryRunner qr = new QueryRunner();
             String sql = "UPDATE talent SET isPublish = ? WHERE userInfoId  = ?";
-            qr.update(conn, sql, userInfoId, isPublish);
+            DBUtil.getQr().update(sql, userInfoId, isPublish);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(null, conn);
         }
     }
+
+    private void save(TalentDto talentDto) {
+        try {
+            String sql =
+                    "INSERT INTO talent (userInfoId, name,tel,className,idealPost,type,workExperience,competitionExperience,"
+                            + "createTime) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            DBUtil.getQr().update(sql, talentDto.getUserInfoId(), talentDto.getName(), talentDto.getTel(),
+                    talentDto.getClassName(), talentDto.getIdealPost(), talentDto.getType(),
+                    talentDto.getWorkExperience(), talentDto.getCompetitionExperience(), new Date());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void update(Integer talentId, TalentDto talentDto) {
+        try {
+            String sql = "UPDATE talent SET name = ?, tel = ?,className = ?,idealPost = ? "
+                    + ",type = ?, workExperience = ?,competitionExperience = ? WHERE id = ?";
+            DBUtil.getQr().update(sql, talentDto.getName(), talentDto.getTel(), talentDto.getClassName(),
+                    talentDto.getIdealPost(), talentDto.getType(), talentDto.getWorkExperience(),
+                    talentDto.getCompetitionExperience(), talentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

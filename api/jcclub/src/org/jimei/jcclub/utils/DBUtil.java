@@ -1,6 +1,10 @@
 package org.jimei.jcclub.utils;
 
-import java.sql.*;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.dbutils.QueryRunner;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
 
 import static org.jimei.jcclub.utils.LoadDBconfig.getDBValue;
 
@@ -8,41 +12,24 @@ import static org.jimei.jcclub.utils.LoadDBconfig.getDBValue;
  * 数据库操类
  *
  */
-public class DBUtil {
+public class DBUtil extends BasicDataSource {
 
-    /**
-     * 连接数据库
-     * @return
-     */
-    public static Connection getConn() {
-        Connection conn = null;
+    public DataSource getDataSource() {
+        DataSource ds = null;
+        super.setDriverClassName(getDBValue("driverclass"));
+        super.setUrl(getDBValue("url"));
+        super.setUsername(getDBValue("username"));
+        super.setPassword(getDBValue("password"));
         try {
-            //加载驱动
-            Class.forName(getDBValue("driverclass"));
-            String url = (getDBValue("url"));
-            String user = (getDBValue("username"));
-            String password = (getDBValue("password"));
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
-
-    /**
-     * 关闭连接
-     */
-    public static void closeConn(Statement stat, Connection conn) {
-        try {
-
-            if (stat != null) {
-                stat.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            ds = super.createDataSource();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return ds;
+    }
+
+    public static QueryRunner getQr() {
+        DataSource dataSource = new DBUtil().getDataSource();
+        return new QueryRunner(dataSource);
     }
 }

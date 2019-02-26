@@ -22,25 +22,26 @@ public class SendMsgUtil {
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
     private static final String URL = "http://v.juhe.cn/sms/send";
 
-    public static Boolean send(String phone, String tplId, String tplValue) {
+    public static Boolean send(String phone, String tplId) {
         String result = null;
         Map<String, String> params = new HashMap<>();//请求参数
         params.put("mobile", phone);//接受短信的用户手机号码
         params.put("tpl_id", tplId);//您申请的短信模板ID，根据实际情况修改
-        params.put("tpl_value", tplValue);//您设置的模板变量，根据实际情况修改
         params.put("key", APP_KEY);//应用APPKEY(应用详细页查询)
         try {
             result = net(URL, params, "GET");
             JSONObject object = JSONObject.fromObject(result);
             if (object.getInt("error_code") == 0) {
                 System.out.println(object.get("result"));
+                return true;
             } else {
                 System.out.println(object.get("error_code") + ":" + object.get("reason"));
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return true;
     }
 
     /**
@@ -49,9 +50,8 @@ public class SendMsgUtil {
      * @param params 请求参数
      * @param method 请求方法
      * @return 网络请求字符串
-     * @throws Exception
      */
-    public static String net(String strUrl, Map<String, String> params, String method) throws Exception {
+    private static String net(String strUrl, Map<String, String> params, String method) throws Exception {
         HttpURLConnection conn = null;
         BufferedReader reader = null;
         String rs = null;
@@ -104,7 +104,7 @@ public class SendMsgUtil {
     }
 
     //将map型转为请求参数型
-    public static String urlencode(Map<String, String> data) {
+    private static String urlencode(Map<String, String> data) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry i : data.entrySet()) {
             try {

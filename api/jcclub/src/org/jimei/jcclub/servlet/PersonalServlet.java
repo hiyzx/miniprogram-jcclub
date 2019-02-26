@@ -1,14 +1,20 @@
 package org.jimei.jcclub.servlet;
 
+import org.jimei.jcclub.dao.DeliveryRelationshipDao;
 import org.jimei.jcclub.dao.TalentDao;
+import org.jimei.jcclub.dao.TeamDao;
 import org.jimei.jcclub.dao.UserInfoDao;
-import org.jimei.jcclub.model.dto.TalentDto;
 import org.jimei.jcclub.model.dto.UserInfoDto;
+import org.jimei.jcclub.model.po.DeliveryRelationship;
 import org.jimei.jcclub.model.po.Talent;
+import org.jimei.jcclub.model.po.Team;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,15 +28,16 @@ public class PersonalServlet extends BaseServletFactory {
     protected Object dataModel(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
         if ("auth".equals(actionName)) {
+            System.out.println("更新用户微信资料");
             return this.auth(request);
-        } else if ("query".equals(actionName)) {
-            return this.query(request);
-        } else if ("save".equals(actionName)) {
-            return this.save(request);
-        } else if ("publish".equals(actionName)) {
-            return this.publish(request);
+        } else if ("myDelivery".equals(actionName)) {
+            System.out.println("查询我的投递记录");
+            return this.myDeliveryList(request);
+        } else if ("otherDelivery".equals(actionName)) {
+            System.out.println("查询我的团队被投递记录");
+            return this.otherDeliveryList(request);
         } else {
-            return null;
+            throw new RuntimeException("actionName不能为空");
         }
     }
 
@@ -43,35 +50,42 @@ public class PersonalServlet extends BaseServletFactory {
         return new UserInfoDao().auth(userInfo);
     }
 
-    private Object query(HttpServletRequest request) {
+    private List<Team> myDeliveryList(HttpServletRequest request) {
         Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
-        Talent talent = new TalentDao().query(userInfoId);
-        if (talent == null) {
-            talent = new Talent();
-
+        Talent talent = new TalentDao().query(userInfoId);// 根据id查询人才
+        if (talent == null) { // 如果为空就不查询
+            System.out.println("未填写资料,就不能投递,就没必要查询投递记录表");
+            return Collections.emptyList();
         }
-        return talent;
+        List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()
+                .myDeliveryRelationshipList(userInfoId);
+        if (deliveryRelationships.isEmpty()) {
+            System.out.println("投递记录表为空");
+            return Collections.emptyList();
+        } else {
+            List<Team> teams = new ArrayList<>(deliveryRelationships.size());
+            deliveryRelationships.forEach(deliveryRelationship -> {
+                Team team = new TeamDao().query(deliveryRelationship.getTeamId());
+                teams.add(team);
+            });
+            return teams;
+        }
     }
 
-    private Boolean save(HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        TalentDto talentDto = new TalentDto();
-        talentDto.setUserInfoId(Integer.valueOf(parameterMap.get("userInfoId")[0]));
-        talentDto.setName(parameterMap.get("name")[0]);
-        talentDto.setTel(parameterMap.get("tel")[0]);
-        talentDto.setClassName(parameterMap.get("className")[0]);
-        talentDto.setIdealPost(parameterMap.get("idealPost")[0]);
-        talentDto.setType(parameterMap.get("type")[0]);
-        talentDto.setWorkExperience(parameterMap.get("workExperience")[0]);
-        talentDto.setCompetitionExperience(parameterMap.get("competitionExperience")[0]);
-        new TalentDao().saveOrUpdate(talentDto);
-        return true;
-    }
-
-    private Boolean publish(HttpServletRequest request) {
-        String userInfoId = request.getParameter("userInfoId");
-        String isPublish = request.getParameter("isPublish");
-        new TalentDao().publish(userInfoId, isPublish);
-        return true;
+    private Object otherDeliveryList(HttpServletRequest request) {
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()
+                .otherDeliveryRelationshipList(userInfoId);
+        if (deliveryRelationships.isEmpty()) {
+            System.out.println("投递记录表为空");
+            return Collections.emptyList();
+        } else {
+            List<Talent> talents = new ArrayList<>(deliveryRelationships.size());
+            deliveryRelationships.forEach(deliveryRelationship -> {
+                Talent talent = new TalentDao().queryById(deliveryRelationship.getTalentId());
+                talents.add(talent);
+            });
+            return talents;
+        }
     }
 }
