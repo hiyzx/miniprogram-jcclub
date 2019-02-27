@@ -8,13 +8,14 @@ Page({
    */
   data: {
      teamInfo:{
-       userInfoId: app.globalData.userId
      }
   },
 
   publish: function () {
+    console.log(app.globalData.userId)
+
     wx.request({
-      url: app.globalData.requestUri + '/teamLibrary?actionName=publish',
+      url: app.globalData.requestUri + '/teamLibrary?actionName=publish&userInfoId=' + app.globalData.userId,
       data: this.data.teamInfo,
       success: function (res) {
         if (res.data.resCode == '200') {
@@ -34,12 +35,12 @@ Page({
     var that = this;
     console.log(e)
     const propertyName = e.currentTarget.id;
-    const talentInfo = Object.assign({}, this.data.talentInfo, { [propertyName]: e.detail.detail.value })
+    const teamInfo = Object.assign({}, this.data.teamInfo, { [propertyName]: e.detail.detail.value })
     console.log(propertyName)
-    console.log(talentInfo)
+    console.log(teamInfo)
     that.setData({
-      talentInfo: talentInfo
+      teamInfo: teamInfo
     })
-    console.log(talentInfo)
+    console.log(teamInfo)
   }
 })
