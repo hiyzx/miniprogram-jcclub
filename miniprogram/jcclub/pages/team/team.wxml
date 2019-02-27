@@ -1,2 +1,21 @@
-<!--pages/team/team.wxml-->
-<text>pages/team/team.wxml</text>
+<view style='text-align: right;padding-right: 20rpx'>
+    <i-button bind:click="toPublish" type="primary" shape="circle" size="small" inline="true">发布</i-button>
+</view>
+
+<view wx:for="{{teams}}" wx:key="key">
+    <i-card title="团队名称：{{item.teamName}}">
+        <view slot="content">联系电话：{{item.tel}}</view>
+        <view slot="content">岗位：{{item.post}}</view>
+        <view slot="content">薪资：{{item.salary}}</view>
+        <view slot="content">招聘类型：{{item.type}}</view>
+        <view slot="content">团队简介：{{item.briefIntro}}</view>
+        <view slot="content">招聘要求：{{item.requirement}}</view>
+        <view slot="content">地点：{{item.place}}</view>
+        <view slot="content" wx:if="{{!item.isDelivery}}">
+          <i-button bind:click="delivery" data-teamId='{{item.id}}' type="info" shape="circle" size="small">投递</i-button>
+        </view>
+         <view slot="content" wx:if="{{item.isDelivery}}">
+          <i-button  type="success" shape="circle" size="small">已投递</i-button>
+        </view>
+    </i-card>
+</view>

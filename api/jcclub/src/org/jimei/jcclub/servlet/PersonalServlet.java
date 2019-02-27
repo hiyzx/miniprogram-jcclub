@@ -52,11 +52,6 @@ public class PersonalServlet extends BaseServletFactory {
 
     private List<Team> myDeliveryList(HttpServletRequest request) {
         Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
-        Talent talent = new TalentDao().query(userInfoId);// 根据id查询人才
-        if (talent == null) { // 如果为空就不查询
-            System.out.println("未填写资料,就不能投递,就没必要查询投递记录表");
-            return Collections.emptyList();
-        }
         List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()
                 .myDeliveryRelationshipList(userInfoId);
         if (deliveryRelationships.isEmpty()) {

@@ -1,16 +1,20 @@
 package org.jimei.jcclub.servlet;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.jimei.jcclub.dao.DeliveryRelationshipDao;
 import org.jimei.jcclub.dao.TalentDao;
 import org.jimei.jcclub.dao.TeamDao;
 import org.jimei.jcclub.model.dto.TeamDto;
+import org.jimei.jcclub.model.po.DeliveryRelationship;
 import org.jimei.jcclub.model.po.Talent;
 import org.jimei.jcclub.model.po.Team;
-import org.jimei.jcclub.utils.SendMsgUtil;
+import org.jimei.jcclub.model.vo.TeamVo;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +29,7 @@ public class TeamLibraryServlet extends BaseServletFactory {
         String actionName = request.getParameter("actionName");
         if ("list".equals(actionName)) {// 查询列表页
             System.out.println("查询团队库列表页");
-            return this.list();
+            return this.list(request);
         } else if ("publish".equals(actionName)) { // 发布
             System.out.println("发布团队信息");
             return this.publish(request);
@@ -37,8 +41,23 @@ public class TeamLibraryServlet extends BaseServletFactory {
         }
     }
 
-    private Object list() {
-        return new TeamDao().list();
+    private Object list(HttpServletRequest request) {
+        // Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        Integer userInfoId = 1;
+        List<Team> list = new TeamDao().list();
+        List<TeamVo> rtn = new ArrayList<>(list.size());
+        List<Integer> deliveryIds = new DeliveryRelationshipDao().myDeliveryIdList(userInfoId);
+        list.forEach(team -> {
+            TeamVo teamVo = new TeamVo();
+            try {
+                BeanUtils.copyProperties(teamVo, team);
+                teamVo.setIsDelivery(deliveryIds.contains(team.getId()));
+                rtn.add(teamVo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return rtn;
     }
 
     private Object publish(HttpServletRequest request) {
@@ -59,8 +78,8 @@ public class TeamLibraryServlet extends BaseServletFactory {
 
     private Object delivery(HttpServletRequest request) {
 
-        Integer teamId = Integer.valueOf(request.getParameter("teamId"));
-        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        Integer teamId = Integer.valueOf(request.getParameter("teamId"));// 团队id
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));// 投递者用户id
         Talent talent = new TalentDao().query(userInfoId);// 根据id查询人才
         if (talent == null) {
             System.out.println("必须完善资料才能投递");
@@ -71,10 +90,16 @@ public class TeamLibraryServlet extends BaseServletFactory {
             System.out.println("不能投递自己的团队");
             return 2;
         }
-        Boolean sendResult = SendMsgUtil.send(team.getTel(), "137774");
-        System.out.println("短信发送完成,结果=" + sendResult);
+        DeliveryRelationship deliveryRelationship = new DeliveryRelationshipDao()
+                .queryByTalentIdAndTeamId(userInfoId, teamId);
+        if (deliveryRelationship != null) {
+            System.out.println("您已经投递,无需重复投递");
+            return 4;
+        }
+        /*Boolean sendResult = SendMsgUtil.send(team.getTel(), "137774");
+        System.out.println("短信发送完成,结果=" + sendResult);*/
         // 保存投递记录表
-        new DeliveryRelationshipDao().save(talent.getId(), team.getId(), team.getUserInfoId());
+        new DeliveryRelationshipDao().save(userInfoId, talent.getId(), team.getId(), team.getUserInfoId());
         return 0;
     }
 }

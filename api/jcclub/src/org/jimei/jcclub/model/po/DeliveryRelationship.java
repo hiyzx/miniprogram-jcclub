@@ -10,6 +10,8 @@ public class DeliveryRelationship {
 
     private Integer id;
 
+    private Integer talentUserInfoId;
+
     private Integer talentId;
 
     private Integer teamId;
@@ -24,6 +26,14 @@ public class DeliveryRelationship {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getTalentUserInfoId() {
+        return talentUserInfoId;
+    }
+
+    public void setTalentUserInfoId(Integer talentUserInfoId) {
+        this.talentUserInfoId = talentUserInfoId;
     }
 
     public Integer getTalentId() {

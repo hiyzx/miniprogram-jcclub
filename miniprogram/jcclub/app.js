@@ -34,7 +34,7 @@ App({
     })
   },
   globalData: {
-    requestUri: 'http://db192f9a.ngrok.io/jcclub/',
+    requestUri: 'http://localhost:8080/',
     userInfo: null,
     userId: null
   }

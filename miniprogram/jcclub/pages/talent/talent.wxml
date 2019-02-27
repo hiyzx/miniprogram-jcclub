@@ -1,2 +1,10 @@
-<!--pages/talent/talent.wxml-->
-<text>pages/talent/talent.wxml</text>
+<view wx:for="{{talents}}" wx:key="key">
+    <i-card title="姓名：{{item.name}}" >
+        <view slot="content">联系电话：{{item.tel}}</view>
+        <view slot="content">所在班级：{{item.className}}</view>
+        <view slot="content">求职意向：{{item.idealPost}}</view>
+        <view slot="content">岗位类型：{{item.type}}</view>
+        <view slot="content">工作经历：{{item.workExperience}}</view>
+        <view slot="content">比赛经历：{{item.competitionExperience}}</view>
+    </i-card>
+</view>

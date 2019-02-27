@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/team/team",
+    "pages/teamInfo/teamInfo",
     "pages/talent/talent",
     "pages/personal/personal",
     "pages/personalInfo/personalInfo",

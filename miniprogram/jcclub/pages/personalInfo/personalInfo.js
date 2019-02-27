@@ -60,12 +60,7 @@ Page({
       }
     })
   },
-  bindKeyInput: function (e) {
-    console.log(e)
-    this.setData({
-      'talentInfo.name': e.detail.value
-    })
-  },
+
   keyInput: function (e) {
     var that = this;
     console.log(e)

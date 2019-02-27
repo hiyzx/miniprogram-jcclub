@@ -20,7 +20,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: app.globalData.requestUri + '/carousel', 
+      url: app.globalData.requestUri + '/index?actionName=carousel',
       success: function (res) {
         that.setData({
           imgUrls:res.data.data
@@ -29,7 +29,7 @@ Page({
       }
     }),
       wx.request({
-      url: app.globalData.requestUri + '/article', 
+      url: app.globalData.requestUri + '/index?actionName=article',
         success: function (res) {
           console.log(res.data.data)
           that.setData({

@@ -1,0 +1,12 @@
+<i-panel>
+    <i-input value="{{talentInfo.name}}" id='name' title="团队名称" autofocus placeholder="请输入团队名称" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.tel}}" id='tel' type="number" title="联系电话" placeholder="请输入联系电话" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.className}}" id='className' title="岗位" placeholder="请输入岗位名称" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.idealPost}}" id='idealPost' title="薪资" placeholder="请输入薪资" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.type}}" id='type' title="招聘类型" placeholder="请输入招聘类型" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.workExperience}}" id='workExperience' type="textarea" title="团队简介" placeholder="请输入团队简介(最多200字)" maxlength="50" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.competitionExperience}}" id='competitionExperience' type="textarea" title="招聘要求" placeholder="请输入参招聘要求(最多200字)" maxlength="50" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.type}}" id='type' title="工作地点" placeholder="请输入工作地点" bindblur="keyInput"/>
+</i-panel>
+
+<i-button bind:click="publish" type="success" shape="circle" size="small" >发布</i-button>

@@ -1,3 +1,6 @@
+//获取应用实例
+const app = getApp()
+
 // pages/team/team.js
 Page({
 
@@ -5,62 +8,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      teams:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      var that = this;
+      wx.request({
+          url: app.globalData.requestUri + '/teamLibrary?actionName=list',
+          success: function (res) {
+              that.setData({
+                  teams:res.data.data
+              })
+          }
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toPublish: function(){
+    wx.navigateTo({
+      url: '/pages/teamInfo/teamInfo'
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  delivery: function (event) {
+    console.log(event.currentTarget.dataset)
+    wx.request({
+      url: app.globalData.requestUri + '/teamLibrary?actionName=delivery&userInfoId=' + app.globalData.userId + '&teamId=' + event.currentTarget.dataset.teamid,
+      success: function (res) {
+        if (res.data.resCode == '200') {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'succes',
+            duration: 1000,
+            mask: true
+          })
+        }
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
