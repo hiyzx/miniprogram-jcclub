@@ -45,7 +45,6 @@ public class TalentLibraryServlet extends BaseServletFactory {
         Talent talent = new TalentDao().query(userInfoId);
         if (talent == null) {
             talent = new Talent();
-
         }
         return talent;
     }

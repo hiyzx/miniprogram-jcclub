@@ -22,9 +22,9 @@ Page({
         that.setData({
           talentInfo: res.data.data
         })
-
       }
     })
+      console.log(that.data.talentInfo)
   },
   saveInfo:function(){
     var that = this;
@@ -44,14 +44,22 @@ Page({
       }
     })
   },
-  publish: function () {
+  publish: function (event) {
+    var that = this;
+    const isPublish = event.currentTarget.dataset.publish;
     wx.request({
-      url: app.globalData.requestUri + '/talentLibrary?actionName=save',
-      data: this.data.talentInfo,
+      url: app.globalData.requestUri + '/talentLibrary?actionName=publish&userInfoId='+ app.globalData.userId
+        + '&isPublish=' + isPublish,
       success: function (res) {
+          console.log(res)
+          console.log(isPublish)
         if (res.data.resCode == '200') {
+          const talentInfo = Object.assign({}, that.data.talentInfo, { [isPublish]: isPublish});
+          that.setData({
+              talentInfo: talentInfo
+          })
           wx.showToast({
-            title: '保存成功',
+            title: '修改成功',
             icon: 'succes',
             duration: 1000,
             mask: true
