@@ -20,7 +20,7 @@ public class IndexServlet extends BaseServletFactory {
     @Override
     protected Object dataModel(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
-        if ("carouselMap".equals(actionName)) {
+        if ("carousel".equals(actionName)) {
             System.out.println("查询首页轮播图地址");
             return this.carouselMap();
         } else if ("article".equals(actionName)) {

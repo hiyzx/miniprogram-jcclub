@@ -58,7 +58,11 @@ Page({
         }
       })
     }
+      console.log("123333333333312313")
+      console.log(this.data.hasUserInfo)
+      console.log(this.data.userInfo)
     if (this.data.hasUserInfo){
+        console.log("12333333333333")
       this.saveUserInfo();
     }
     
@@ -151,6 +155,7 @@ Page({
       }
     }),
       console.log(that.data.hasUserInfoId)
+      console.log(app.globalData.userId)
   },
   myInfo: function(){
     wx.navigateTo({

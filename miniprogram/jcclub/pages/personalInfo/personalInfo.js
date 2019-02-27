@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.globalData.requestUri + '/personal?actionName=query&userInfoId=' + app.globalData.userId,
+      url: app.globalData.requestUri + '/talentLibrary?actionName=query&userInfoId=' + app.globalData.userId,
       success: function (res) {
         console.log(res)
         that.setData({
@@ -30,7 +30,7 @@ Page({
     var that = this;
     console.log(that.data.talentInfo)
     wx.request({  
-      url: app.globalData.requestUri + '/personal?actionName=save&userInfoId=' + app.globalData.userId,
+      url: app.globalData.requestUri + '/talentLibrary?actionName=save&userInfoId=' + app.globalData.userId,
       data: that.data.talentInfo,
       success: function (res) {
         if(res.data.resCode == '200'){
@@ -46,7 +46,7 @@ Page({
   },
   publish: function () {
     wx.request({
-      url: app.globalData.requestUri + '/personal?actionName=save',
+      url: app.globalData.requestUri + '/talentLibrary?actionName=save',
       data: this.data.talentInfo,
       success: function (res) {
         if (res.data.resCode == '200') {

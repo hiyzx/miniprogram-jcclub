@@ -34,7 +34,7 @@ App({
     })
   },
   globalData: {
-    requestUri: 'http://localhost:8080/',
+    requestUri: 'http://1d8p930980.iok.la:35815/jcclub',
     userInfo: null,
     userId: null
   }
