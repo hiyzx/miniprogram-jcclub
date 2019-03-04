@@ -23,6 +23,13 @@ public class SendMsgUtil {
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
     private static final String URL = "http://v.juhe.cn/sms/send";
 
+
+    /**
+     *
+     * @param phone 发送的手机号
+     * @param tplId 聚合数据配置的模板id
+     * @return 发送结果
+     */
     public static Boolean send(String phone, String tplId) {
         String result = null;
         Map<String, String> params = new HashMap<>();//请求参数

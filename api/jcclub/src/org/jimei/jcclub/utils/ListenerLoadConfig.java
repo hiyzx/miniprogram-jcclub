@@ -21,6 +21,6 @@ public class ListenerLoadConfig implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         String path = event.getServletContext().getRealPath("/WEB-INF/config/dbconfig.properties");
-        LoadDBconfig.load(path);
+        DBUtil.load(path);
     }
 }

@@ -38,12 +38,35 @@ Page({
       url: app.globalData.requestUri + '/teamLibrary?actionName=delivery&userInfoId=' + app.globalData.userId + '&teamId=' + event.currentTarget.dataset.teamid,
       success: function (res) {
         if (res.data.resCode == '200') {
-          wx.showToast({
-            title: '保存成功',
-            icon: 'succes',
-            duration: 1000,
-            mask: true
-          })
+          if(res.data.data === 1){
+              wx.showToast({
+                  title: '请先前往个人中心/我的信息,完善资料才能投递',
+                  icon: 'succes',
+                  duration: 1000,
+                  mask: true
+              })
+          }else if(res.data.data === 1){
+              wx.showToast({
+                  title: '不能投递自己的团队',
+                  icon: 'succes',
+                  duration: 1000,
+                  mask: true
+              })
+          }else if(res.data.data === 1){
+              wx.showToast({
+                  title: '您已经投递,无需重复投递',
+                  icon: 'succes',
+                  duration: 1000,
+                  mask: true
+              })
+          }else if(res.data.data === 0){
+              wx.showToast({
+                  title: '投递成功,请耐心等候团队负责人联系',
+                  icon: 'succes',
+                  duration: 1000,
+                  mask: true
+              })
+          }
         }
       }
     })

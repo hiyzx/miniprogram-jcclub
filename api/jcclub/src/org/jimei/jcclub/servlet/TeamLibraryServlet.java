@@ -9,6 +9,7 @@ import org.jimei.jcclub.model.po.DeliveryRelationship;
 import org.jimei.jcclub.model.po.Talent;
 import org.jimei.jcclub.model.po.Team;
 import org.jimei.jcclub.model.vo.TeamVo;
+import org.jimei.jcclub.utils.SendMsgUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -97,8 +98,8 @@ public class TeamLibraryServlet extends BaseServletFactory {
             System.out.println("您已经投递,无需重复投递");
             return 4;
         }
-        /*Boolean sendResult = SendMsgUtil.send(team.getTel(), "137774");
-        System.out.println("短信发送完成,结果=" + sendResult);*/
+        Boolean sendResult = SendMsgUtil.send(team.getTel(), "137774");
+        System.out.println("短信发送完成,结果=" + sendResult);
         // 保存投递记录表
         new DeliveryRelationshipDao().save(userInfoId, talent.getId(), team.getId(), team.getUserInfoId());
         return 0;
