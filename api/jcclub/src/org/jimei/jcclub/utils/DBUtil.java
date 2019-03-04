@@ -9,12 +9,18 @@ import java.sql.SQLException;
 import static org.jimei.jcclub.utils.LoadDBconfig.getDBValue;
 
 /**
- * 数据库操类
- *
+ * @author yezhaoxing
+ * @date 2019/3/3
+ * @description 数据工具类, 用于或者QueryRunner
  */
 public class DBUtil extends BasicDataSource {
 
-    public DataSource getDataSource() {
+    public static QueryRunner getQr() {
+        DataSource dataSource = new DBUtil().getDataSource();
+        return new QueryRunner(dataSource);
+    }
+
+    private DataSource getDataSource() {
         DataSource ds = null;
         super.setDriverClassName(getDBValue("driverclass"));
         super.setUrl(getDBValue("url"));
@@ -26,10 +32,5 @@ public class DBUtil extends BasicDataSource {
             e.printStackTrace();
         }
         return ds;
-    }
-
-    public static QueryRunner getQr() {
-        DataSource dataSource = new DBUtil().getDataSource();
-        return new QueryRunner(dataSource);
     }
 }

@@ -25,7 +25,7 @@ import java.util.Map;
 public class PersonalServlet extends BaseServletFactory {
 
     @Override
-    protected Object dataModel(HttpServletRequest request, HttpServletResponse response) {
+    protected Object handle(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
         if ("auth".equals(actionName)) {
             System.out.println("更新用户微信资料");
@@ -41,6 +41,7 @@ public class PersonalServlet extends BaseServletFactory {
         }
     }
 
+    // 更新用户微信资料
     private Integer auth(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         UserInfoDto userInfo = new UserInfoDto();
@@ -50,6 +51,7 @@ public class PersonalServlet extends BaseServletFactory {
         return new UserInfoDao().auth(userInfo);
     }
 
+    // 查询我的投递记录
     private List<Team> myDeliveryList(HttpServletRequest request) {
         Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
         List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()
@@ -67,6 +69,7 @@ public class PersonalServlet extends BaseServletFactory {
         }
     }
 
+    // 查询我的团队被投递记录
     private Object otherDeliveryList(HttpServletRequest request) {
         Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
         List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()

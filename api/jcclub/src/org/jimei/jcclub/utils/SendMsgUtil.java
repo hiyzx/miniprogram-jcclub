@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * @author yezhaoxing
  * @since 2019/02/25
+ * @description 聚合数据发送短信工具类
  */
 public class SendMsgUtil {
 

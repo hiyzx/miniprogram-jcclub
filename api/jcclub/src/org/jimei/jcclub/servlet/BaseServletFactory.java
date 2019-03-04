@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+/**
+ * @author yezhaoxing
+ * @date 2019/3/3
+ */
 public abstract class BaseServletFactory extends HttpServlet {
 
     /**
@@ -28,17 +32,17 @@ public abstract class BaseServletFactory extends HttpServlet {
         BaseReturnVo rtn;
         try {
             Map<String, String[]> parameterMap = request.getParameterMap();
-            System.out.println("请求参数为: " + JSON.toJSONString(parameterMap));
-            Object object = dataModel(request, response);
-            rtn = ReturnVo.success(object);
+            System.out.println("请求参数为: " + JSON.toJSONString(parameterMap));// 打印请求参数
+            Object object = handle(request, response);// 调用具体的servlet
+            rtn = ReturnVo.success(object);// 封装成功的结果
         } catch (Exception ex) {
             ex.printStackTrace();
-            rtn = BaseReturnVo.fail();
+            rtn = BaseReturnVo.fail();// 封装失败的结果
         }
         PrintWriter pw = response.getWriter();
         String json = JSON.toJSONString(rtn);
-        pw.print(json);
-        System.out.println("返回的数据 :" + rtn.getResCode());
+        pw.print(json);// 输出结果到页面
+        System.out.println("返回的数据 :" + json);
         pw.close();
     }
 
@@ -47,6 +51,6 @@ public abstract class BaseServletFactory extends HttpServlet {
         this.doGet(request, response);
     }
 
-    protected abstract Object dataModel(HttpServletRequest request, HttpServletResponse response);
+    protected abstract Object handle(HttpServletRequest request, HttpServletResponse response);
 
 }

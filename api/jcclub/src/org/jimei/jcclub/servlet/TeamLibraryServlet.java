@@ -20,12 +20,13 @@ import java.util.Map;
 /**
  * @author yezhaoxing
  * @since 2019/02/19
+ * @description 团队库接口
  */
 @WebServlet("/teamLibrary")
 public class TeamLibraryServlet extends BaseServletFactory {
 
     @Override
-    protected Object dataModel(HttpServletRequest request, HttpServletResponse response) {
+    protected Object handle(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
         if ("list".equals(actionName)) {// 查询列表页
             System.out.println("查询团队库列表页");

@@ -12,12 +12,13 @@ import java.util.Map;
 /**
  * @author yezhaoxing
  * @since 2019/02/19
+ * @description 人才库接口
  */
 @WebServlet("/talentLibrary")
 public class TalentLibraryServlet extends BaseServletFactory {
 
     @Override
-    protected Object dataModel(HttpServletRequest request, HttpServletResponse response) {
+    protected Object handle(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
         if ("list".equals(actionName)) {
             System.out.println("查询人才库列表页");

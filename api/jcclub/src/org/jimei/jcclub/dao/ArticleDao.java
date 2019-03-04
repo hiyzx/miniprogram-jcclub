@@ -7,8 +7,18 @@ import org.jimei.jcclub.utils.DBUtil;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author yezhaoxing
+ * @date 2019/3/4
+ * @description 对Article表的数据库操作
+ */
 public class ArticleDao {
 
+    /**
+     * @author yezhaoxing
+     * @date 2019/3/4
+     * @description 查询所有isShow=1的数据
+     */
     public List<Article> getDataList() {
         try {
             String sql = "select * from article where isShow = 1";
