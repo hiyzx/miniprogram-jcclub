@@ -4,7 +4,7 @@ package org.jimei.jcclub.model.vo;
 /**
  * 返回类
  *
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2017/4/29
  */
 public class ReturnVo<T> extends BaseReturnVo {

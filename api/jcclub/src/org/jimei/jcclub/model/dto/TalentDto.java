@@ -1,7 +1,7 @@
 package org.jimei.jcclub.model.dto;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/2/24
  */
 public class TalentDto {

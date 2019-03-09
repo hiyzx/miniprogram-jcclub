@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/3/4
  * @description 对DeliveryRelationship表的数据库操作
  */
 public class DeliveryRelationshipDao {
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 保存
      */
@@ -32,7 +32,7 @@ public class DeliveryRelationshipDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 根据用户id查询我投递的团队id
      */
@@ -42,7 +42,7 @@ public class DeliveryRelationshipDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 根据用户id查询我投递的团队
      */
@@ -57,7 +57,7 @@ public class DeliveryRelationshipDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 根据人才id和团队id查询数据
      */
@@ -73,7 +73,7 @@ public class DeliveryRelationshipDao {
 
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 根据团队用户id查询被投递的记录
      */

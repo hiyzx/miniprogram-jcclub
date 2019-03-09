@@ -3,7 +3,7 @@ package org.jimei.jcclub.model.po;
 import java.util.Date;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/2/24
  */
 public class Talent {

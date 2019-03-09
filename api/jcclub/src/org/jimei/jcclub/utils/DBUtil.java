@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/3/3
  * @description 数据工具类, 用于或者QueryRunner
  */

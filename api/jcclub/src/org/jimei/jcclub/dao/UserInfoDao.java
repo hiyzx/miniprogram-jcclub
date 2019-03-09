@@ -8,14 +8,14 @@ import org.jimei.jcclub.utils.DBUtil;
 import java.util.Date;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/3/4
  * @description 对微信用户表的操作
  */
 public class UserInfoDao {
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 新增或者更新用户信息
      */
@@ -34,7 +34,7 @@ public class UserInfoDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 根据用户昵称查询用户信息(因为openid还要做服务器关联,而且这个字段没有用到)
      */
@@ -49,7 +49,7 @@ public class UserInfoDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 保存用户信息
      */
@@ -65,7 +65,7 @@ public class UserInfoDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 更新用户信息
      */

@@ -3,7 +3,7 @@ package org.jimei.jcclub.model.vo;
 /**
  * 基础的返回类
  *
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2017/4/29
  */
 public class BaseReturnVo {

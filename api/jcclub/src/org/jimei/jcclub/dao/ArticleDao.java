@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/3/4
  * @description 对Article表的数据库操作
  */
 public class ArticleDao {
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/4
      * @description 查询所有isShow=1的数据
      */

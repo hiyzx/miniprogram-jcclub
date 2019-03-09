@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @since 2019/02/25
  * @description 聚合数据发送短信工具类
  */

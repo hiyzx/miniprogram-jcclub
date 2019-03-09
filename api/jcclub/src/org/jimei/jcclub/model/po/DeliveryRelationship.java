@@ -3,7 +3,7 @@ package org.jimei.jcclub.model.po;
 import java.util.Date;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @since 2019/02/26
  */
 public class DeliveryRelationship {

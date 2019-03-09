@@ -1,7 +1,7 @@
 package org.jimei.jcclub.model.dto;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @since 2019/02/26
  */
 public class TeamDto {

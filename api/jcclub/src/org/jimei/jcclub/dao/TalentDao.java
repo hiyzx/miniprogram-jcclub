@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author yezhaoxing
+ * @author yexiaoling
  * @date 2019/3/4
  * @description 对Talent表的操作
  */
 public class TalentDao {
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 保存或者更新用户信息, 如果是有记录, 就更新, 没有的话就新增一条记录
      */
@@ -34,7 +34,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 查询所有已经发布的人才库信息
      */
@@ -49,7 +49,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 根据用户id查询人才库信息
      */
@@ -64,7 +64,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 根据人才库id查询人才库信息
      */
@@ -79,7 +79,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 根据用户id发布或者取消发布到人才库列表
      * @param userInfoId 用户id
@@ -95,7 +95,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 保存人才库信息
      */
@@ -113,7 +113,7 @@ public class TalentDao {
     }
 
     /**
-     * @author yezhaoxing
+     * @author yexiaoling
      * @date 2019/3/3
      * @description 更新人才库信息
      */
