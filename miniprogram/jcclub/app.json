@@ -6,6 +6,8 @@
     "pages/talent/talent",
     "pages/personal/personal",
     "pages/personalInfo/personalInfo",
+    "pages/myDeliveryList/myDeliveryList",
+    "pages/otherDelivery/otherDelivery",
     "pages/out/out"
   ],
   "window":{

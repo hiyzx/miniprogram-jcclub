@@ -3,7 +3,7 @@
 <view wx:if="{{hasUserInfo && hasUserInfoId}}">
   <i-card title="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}"></i-card>
 <i-button bind:click="myInfo" type="success" shape="circle" size="small">我的信息</i-button>
-<i-button bind:click="handleClick" type="primary" shape="circle" size="small">我的投递</i-button>
-<i-button bind:click="handleClick" type="success" shape="circle" size="small">人才投递查看</i-button>
+<i-button bind:click="myDeliveryList" type="primary" shape="circle" size="small">我的投递</i-button>
+<i-button bind:click="otherDelivery" type="success" shape="circle" size="small">人才投递查看</i-button>
 </view>
 

@@ -161,6 +161,17 @@ Page({
     wx.navigateTo({
       url: '/pages/personalInfo/personalInfo'
     })
+  },
+  myDeliveryList: function () {
+    wx.navigateTo({
+      url: '/pages/myDeliveryList/myDeliveryList'
+    })
+  },
+  otherDelivery: function () {
+    wx.navigateTo({
+      url: '/pages/otherDelivery/otherDelivery'
+    })
   }
+
 
 })

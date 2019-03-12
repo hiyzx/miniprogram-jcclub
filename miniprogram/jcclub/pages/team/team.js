@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
       var that = this;
       wx.request({
-          url: app.globalData.requestUri + '/teamLibrary?actionName=list',
+        url: app.globalData.requestUri + '/teamLibrary?actionName=list&userInfoId=' + app.globalData.userId,
           success: function (res) {
               that.setData({
                   teams:res.data.data

@@ -44,8 +44,8 @@ public class TeamLibraryServlet extends BaseServletFactory {
     }
 
     private Object list(HttpServletRequest request) {
-        // Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
-        Integer userInfoId = 1;
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        // Integer userInfoId = 1;
         List<Team> list = new TeamDao().list();
         List<TeamVo> rtn = new ArrayList<>(list.size());
         List<Integer> deliveryIds = new DeliveryRelationshipDao().myDeliveryIdList(userInfoId);
