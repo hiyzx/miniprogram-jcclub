@@ -162,6 +162,11 @@ Page({
       url: '/pages/personalInfo/personalInfo'
     })
   },
+  myTeam: function () {
+    wx.navigateTo({
+      url: '/pages/myTeam/myTeam'
+    })
+  },
   myDeliveryList: function () {
     wx.navigateTo({
       url: '/pages/myDeliveryList/myDeliveryList'

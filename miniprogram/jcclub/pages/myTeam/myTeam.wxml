@@ -1,0 +1,17 @@
+<view wx:for="{{teams}}" wx:key="key">
+    <i-card title="团队名称：{{item.teamName}}">
+        <view slot="content">联系电话：{{item.tel}}</view>
+        <view slot="content">岗位：{{item.post}}</view>
+        <view slot="content">薪资：{{item.salary}}</view>
+        <view slot="content">招聘类型：{{item.type}}</view>
+        <view slot="content">团队简介：{{item.briefIntro}}</view>
+        <view slot="content">招聘要求：{{item.requirement}}</view>
+        <view slot="content">地点：{{item.place}}</view>
+         <view slot="content" wx:if="{{item.isPublish != 1}}">
+          <i-button bind:click="publish" data-teamId='{{item.id}}' data-isPublish='1' type="info" shape="circle" size="small">发布</i-button>
+        </view>
+         <view slot="content" wx:if="{{item.isPublish == 1}}">
+          <i-button bind:click="publish" data-teamId='{{item.id}}' data-isPublish='0' type="info" shape="circle" size="small">取消发布</i-button>
+        </view>
+    </i-card>
+</view>

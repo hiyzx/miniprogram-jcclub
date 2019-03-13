@@ -28,6 +28,8 @@ public class Team {
 
     private String place;
 
+    private String isPublish;
+
     private Date createTime;
 
     public Integer getId() {
@@ -108,6 +110,14 @@ public class Team {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getIsPublish() {
+        return isPublish;
+    }
+
+    public void setIsPublish(String isPublish) {
+        this.isPublish = isPublish;
     }
 
     public Date getCreateTime() {

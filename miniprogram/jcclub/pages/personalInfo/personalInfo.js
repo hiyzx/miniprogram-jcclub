@@ -64,6 +64,7 @@ Page({
                         duration: 1000,
                         mask: true
                     })
+                  that.onLoad();
                 }
             }
         })

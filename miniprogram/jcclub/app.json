@@ -6,6 +6,7 @@
     "pages/talent/talent",
     "pages/personal/personal",
     "pages/personalInfo/personalInfo",
+    "pages/myTeam/myTeam",
     "pages/myDeliveryList/myDeliveryList",
     "pages/otherDelivery/otherDelivery",
     "pages/out/out"

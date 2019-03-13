@@ -36,6 +36,12 @@ public class PersonalServlet extends BaseServletFactory {
         } else if ("otherDelivery".equals(actionName)) {
             System.out.println("查询我的团队被投递记录");
             return this.otherDeliveryList(request);
+        } else if ("myTeam".equals(actionName)) {
+            System.out.println("查询我发布的团队招聘信息");
+            return this.myTeam(request);
+        } else if ("publishMyTeam".equals(actionName)) {
+            System.out.println("发布/取消发布团队信息");
+            return this.publishMyTeam(request);
         } else {
             throw new RuntimeException("actionName不能为空");
         }
@@ -85,5 +91,19 @@ public class PersonalServlet extends BaseServletFactory {
             });
             return talents;
         }
+    }
+
+    // 查询我的团队信息
+    private Object myTeam(HttpServletRequest request) {
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        return new TeamDao().listByUserId(userInfoId);
+    }
+
+    // 发布/取消发布团队信息
+    private Object publishMyTeam(HttpServletRequest request) {
+        Integer teamId = Integer.valueOf(request.getParameter("teamId"));
+        Integer isPublish = Integer.valueOf(request.getParameter("isPublish"));
+        new TeamDao().publish(teamId, isPublish);
+        return true;
     }
 }

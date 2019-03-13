@@ -36,6 +36,16 @@ public class TeamDao {
         }
     }
 
+    public List<Team> listByUserId(Integer userInfoId) {
+        try {
+            String sql = "select * from team where userInfoId = ?";
+            return DBUtil.getQr().query(sql, new BeanListHandler<>(Team.class), userInfoId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void save(TeamDto teamDto) {
         try {
             String sql = "INSERT INTO team (userInfoId, teamName,post,type,salary,briefIntro,requirement,tel,"
@@ -46,6 +56,15 @@ public class TeamDao {
                             teamDto.getPlace(), new Date());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void publish(Integer teamId, Integer isPublish) {
+        try {
+            String sql = "UPDATE team SET isPublish = ? WHERE id = ?";
+            DBUtil.getQr().update(sql, isPublish, teamId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }
