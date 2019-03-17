@@ -34,3 +34,4 @@ takeaway
 2. 小程序：
     1. 官方文档:https://developers.weixin.qq.com/miniprogram/dev/
     2. 登录授权:http://caibaojian.com/wx-getuserinfo.html
+    3. 异步转同步:http://www.wxapp-union.com/article-4376-1.html

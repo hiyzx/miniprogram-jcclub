@@ -1,8 +1,10 @@
-<view style='text-align: right;padding-right: 20rpx'>
+<i-button wx:if="{{!hasUserInfo && canIUse && getUserInfoFail}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="success" shape="circle">获取个人信息</i-button>
+
+<view wx:if="{{hasUserInfo && hasUserInfoId}}" style='text-align: right;padding-right: 20rpx'>
     <i-button bind:click="toPublish" type="primary" shape="circle" size="small" inline="true">发布</i-button>
 </view>
 
-<view wx:for="{{teams}}" wx:key="key">
+<view wx:if="{{hasUserInfo && hasUserInfoId}}" wx:for="{{teams}}" wx:key="key">
     <i-card title="团队名称：{{item.teamName}}">
         <view slot="content">联系电话：{{item.tel}}</view>
         <view slot="content">岗位：{{item.post}}</view>
