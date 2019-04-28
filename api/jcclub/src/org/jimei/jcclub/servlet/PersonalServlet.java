@@ -8,6 +8,7 @@ import org.jimei.jcclub.model.dto.UserInfoDto;
 import org.jimei.jcclub.model.po.DeliveryRelationship;
 import org.jimei.jcclub.model.po.Talent;
 import org.jimei.jcclub.model.po.Team;
+import org.jimei.jcclub.utils.WxUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,10 @@ public class PersonalServlet extends BaseServletFactory {
     @Override
     protected Object handle(HttpServletRequest request, HttpServletResponse response) {
         String actionName = request.getParameter("actionName");
-        if ("auth".equals(actionName)) {
+        if ("openid".equals(actionName)) {
+            System.out.println("获取微信openid");
+            return this.getOpenid(request);
+        } else if ("auth".equals(actionName)) {
             System.out.println("更新用户微信资料");
             return this.auth(request);
         } else if ("myDelivery".equals(actionName)) {
@@ -47,6 +51,12 @@ public class PersonalServlet extends BaseServletFactory {
         }
     }
 
+    // 获取微信openid
+    private String getOpenid(HttpServletRequest request){
+        String code = request.getParameter("code");
+        return WxUtil.getOpenid(code);
+    }
+
     // 更新用户微信资料
     private Integer auth(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -54,6 +64,7 @@ public class PersonalServlet extends BaseServletFactory {
         userInfo.setAvatarUrl(parameterMap.get("avatarUrl")[0]);
         userInfo.setNickName(parameterMap.get("nickName")[0]);
         userInfo.setGender(Integer.valueOf(parameterMap.get("gender")[0]));
+        userInfo.setOpenid(parameterMap.get("openid")[0]);
         return new UserInfoDao().auth(userInfo);
     }
 

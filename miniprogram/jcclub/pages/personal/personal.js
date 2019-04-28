@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    if (app.globalData.userInfo) {
+    if (app.globalData.hasUserInfo) {
       console.log(1)
       that.setData({
         userInfo: app.globalData.userInfo,
@@ -34,6 +34,7 @@ Page({
       app.userInfoReadyCallback = res => {
         console.log(12)
         app.globalData.userInfo = res.userInfo
+        app.globalData.hasUserInfo = true
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -45,6 +46,7 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          app.globalData.hasUserInfo = true
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -83,11 +85,12 @@ Page({
     wx.login({
       success: function (res) {
         var code = res.code;
-        console.log(code);
+        console.log(code)
         wx.getUserInfo({
           success: function (res) {
             console.log(7);
             app.globalData.userInfo = res.userInfo
+            app.globalData.hasUserInfo = true
             that.setData({
               getUserInfoFail: false,
               userInfo: res.userInfo,
@@ -104,6 +107,10 @@ Page({
             })
           }
         })
+        if (code) {
+          console.log(code);
+          that.getOpenid(code);
+        }
       }
     })
   },
@@ -130,16 +137,29 @@ Page({
     console.log(5);
     console.log(e)
     if (e.detail.userInfo) {
+      console.log('不用授权')
       app.globalData.userInfo = e.detail.userInfo
       this.setData({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
       })
     } else {
+      console.log('打开授权')
       this.openSetting();
     }
     this.saveUserInfo();
   },
+  getOpenid:function(code){
+    var that = this;
+    wx.request({
+      url: app.globalData.requestUri + '/personal?actionName=openid&code=' + code,
+      success: function (res) {
+        const userInfo = Object.assign({}, that.data.userInfo, { ['openid']: res.data.data });
+        that.data.userInfo = userInfo;
+      }
+    })
+  },
+
   saveUserInfo: function(){
     var that = this;
     console.log(JSON.stringify(this.data.userInfo))

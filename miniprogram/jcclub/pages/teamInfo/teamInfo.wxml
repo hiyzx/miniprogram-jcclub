@@ -3,10 +3,12 @@
     <i-input value="{{talentInfo.tel}}" id='tel' type="number" title="联系电话" placeholder="请输入联系电话" bindblur="keyInput"/>
     <i-input value="{{talentInfo.post}}" id='post' title="岗位" placeholder="请输入岗位名称" bindblur="keyInput"/>
     <i-input value="{{talentInfo.salary}}" id='salary' title="薪资" placeholder="请输入薪资" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.type}}" id='type' title="岗位类型" placeholder="请输入岗位类型" bindblur="keyInput"/>
     <i-input value="{{talentInfo.type}}" id='type' title="招聘类型" placeholder="请输入招聘类型" bindblur="keyInput"/>
     <i-input value="{{talentInfo.briefIntro}}" id='briefIntro' type="textarea" title="团队简介" placeholder="请输入团队简介(最多200字)" maxlength="50" bindblur="keyInput"/>
     <i-input value="{{talentInfo.requirement}}" id='requirement' type="textarea" title="招聘要求" placeholder="请输入参招聘要求(最多200字)" maxlength="50" bindblur="keyInput"/>
     <i-input value="{{talentInfo.place}}" id='place' title="工作地点" placeholder="请输入工作地点" bindblur="keyInput"/>
 </i-panel>
+
 
 <i-button bind:click="publish" type="success" shape="circle" size="small" >发布</i-button>

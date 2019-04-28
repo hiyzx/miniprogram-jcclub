@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.0",
 	"appid": "wx3f17e7fbd19b1272",
-	"projectname": "miniprogram-jcclub",
+	"projectname": "jcclub",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

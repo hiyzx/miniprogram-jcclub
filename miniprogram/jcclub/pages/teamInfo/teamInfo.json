@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "i-input": "../../iview/input/index",
-    "i-button": "../../iview/button/index"
+    "i-button": "../../iview/button/index",
+    "component-select": "../select/select"
   }
 }

@@ -9,6 +9,7 @@
     "pages/myTeam/myTeam",
     "pages/myDeliveryList/myDeliveryList",
     "pages/otherDelivery/otherDelivery",
+    "pages/select/select",
     "pages/out/out"
   ],
   "window":{
