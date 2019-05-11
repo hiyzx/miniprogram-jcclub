@@ -1,0 +1,15 @@
+<view wx:for="{{teams}}" wx:key="key">
+    <i-card title="团队名称：{{item.teamName}}" extra="{{item.approvalStatusDisplay}}">
+        <view slot="content">联系电话：{{item.tel}}</view>
+        <view slot="content">岗位：{{item.post}}</view>
+        <view slot="content">薪资：{{item.salary}}</view>
+        <view slot="content">招聘类型：{{item.type}}</view>
+        <view slot="content">团队简介：{{item.briefIntro}}</view>
+        <view slot="content">招聘要求：{{item.requirement}}</view>
+        <view slot="content">地点：{{item.place}}</view>
+        <view slot="content" wx:if="{{item.approvalStatus == 0}}">
+          <i-button bind:click="approval" data-postId='{{item.id}}' data-approvalStatus='1'  type="info" shape="circle" size="small">审批通过</i-button>
+          <i-button bind:click="approval" data-postId='{{item.id}}' data-approvalStatus='2'  type="success" shape="circle" size="small">审批拒绝</i-button>
+        </view>
+    </i-card>
+</view>

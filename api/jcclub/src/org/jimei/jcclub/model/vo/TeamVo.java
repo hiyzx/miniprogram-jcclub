@@ -8,7 +8,9 @@ import java.util.Date;
  */
 public class TeamVo {
 
-    private Integer id;
+    private Integer id;// 岗位id
+
+    private Integer teamId;
 
     private Integer userInfoId;
 
@@ -30,6 +32,8 @@ public class TeamVo {
 
     private Boolean isDelivery;
 
+    private Integer approvalStatus;
+
     private Date createTime;
 
     public Integer getId() {
@@ -38,6 +42,14 @@ public class TeamVo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 
     public Integer getUserInfoId() {
@@ -120,11 +132,26 @@ public class TeamVo {
         this.isDelivery = isDelivery;
     }
 
+    public Integer getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(Integer approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getApprovalStatusDisplay(){
+        if(this.approvalStatus == null || this.approvalStatus == 0){
+            return "待审批";
+        }
+        return this.approvalStatus == 1 ? "审批通过" : "审批拒绝";
     }
 }

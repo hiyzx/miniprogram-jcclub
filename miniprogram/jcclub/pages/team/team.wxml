@@ -1,7 +1,7 @@
 <i-button wx:if="{{!hasUserInfo && canIUse && getUserInfoFail}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="success" shape="circle">获取个人信息</i-button>
 
 <view wx:if="{{hasUserInfo && hasUserInfoId}}" style='text-align: right;padding-right: 20rpx'>
-    <i-button bind:click="toPublish" type="primary" shape="circle" size="small" inline="true">发布</i-button>
+    <i-button bind:click="toPublish" type="primary" shape="circle" size="small" inline="true">申请发布</i-button>
 </view>
 
 <view wx:if="{{hasUserInfo && hasUserInfoId}}" wx:for="{{teams}}" wx:key="key">
@@ -14,7 +14,7 @@
         <view slot="content">招聘要求：{{item.requirement}}</view>
         <view slot="content">地点：{{item.place}}</view>
         <view slot="content" wx:if="{{!item.isDelivery}}">
-          <i-button bind:click="delivery" data-teamId='{{item.id}}' type="info" shape="circle" size="small">投递</i-button>
+          <i-button bind:click="delivery" data-postId='{{item.id}}' data-teamId='{{item.teamId}}'  type="info" shape="circle" size="small">投递</i-button>
         </view>
          <view slot="content" wx:if="{{item.isDelivery}}">
           <i-button  type="success" shape="circle" size="small">已投递</i-button>

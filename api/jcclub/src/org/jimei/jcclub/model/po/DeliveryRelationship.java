@@ -18,6 +18,8 @@ public class DeliveryRelationship {
 
     private Integer teamUserInfoId;
 
+    private Integer postId;
+
     private Date createTime;
 
     public Integer getId() {
@@ -58,6 +60,14 @@ public class DeliveryRelationship {
 
     public void setTeamUserInfoId(Integer teamUserInfoId) {
         this.teamUserInfoId = teamUserInfoId;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
     public Date getCreateTime() {

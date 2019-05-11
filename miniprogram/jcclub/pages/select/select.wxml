@@ -1,0 +1,15 @@
+<view class='width-100p'style="position:relative">
+  <view class=' selectParent' catchtap='showItemData'>
+    <text class='flex-1'>{{selectItemContent}}</text>
+    <image class='image' src='http://nsr.9hive.cn/global/minprogram/jnby/icon_item.svg' style='transform:rotate(90deg)'></image>
+
+  </view>
+  <view class='selectContainer' hidden="{{showDropItem}}">
+    <block wx:for="{{itemList}}" wx:for-item="selectItem" wx:for-index="selectItemIndex" wx:key="selectItemIndex">
+      <view class='selectItem' data-selectItem="{{selectItem}}" catchtap='selectItem'>{{selectItem.name}}</view>
+    </block>
+
+
+  </view>
+  <!-- <view class='shade'></view> -->
+</view>

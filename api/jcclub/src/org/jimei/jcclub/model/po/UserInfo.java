@@ -30,6 +30,11 @@ public class UserInfo {
      */
     private Integer gender;
 
+    /**
+     * 是否管理员
+     */
+    private Integer isAdmin;
+
     private Date createTime;
 
     public Integer getId() {
@@ -78,5 +83,13 @@ public class UserInfo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

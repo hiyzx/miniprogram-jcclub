@@ -7,13 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-     teamInfo:{
-     }
+    postInfo: {
+    },
+    teamId:null
   },
 
-  /**
-    * 生命周期函数--监听页面加载
-    */
   onLoad: function (options) {
     var that = this;
     wx.request({
@@ -21,19 +19,19 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          teamInfo: res.data.data
+          teamId: res.data.data.id
         })
       }
     })
-    console.log(that.data.teamInfo)
+    console.log(that.data.teamId)
   },
 
   publish: function () {
     console.log(app.globalData.userId)
     var that = this;
     wx.request({
-      url: app.globalData.requestUri + '/teamLibrary?actionName=saveTeamInfo&userInfoId=' + app.globalData.userId,
-      data: this.data.teamInfo,
+      url: app.globalData.requestUri + '/teamLibrary?actionName=publish&userInfoId=' + app.globalData.userId + '&teamId=' + that.data.teamId,
+      data: this.data.postInfo,
       success: function (res) {
         if (res.data.resCode == '200') {
           wx.showToast({
@@ -42,21 +40,40 @@ Page({
             duration: 1000,
             mask: true
           })
+          that.changeParentData();
         }
       }
     })
+  },
+
+  changeParentData: function () {
+    var pages = getCurrentPages();//当前页面栈
+    if (pages.length > 1) {
+      var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
+      beforePage.changeData();//触发父页面中的方法
+    }
+    wx.navigateBack({
+      delta: 1
+    });
   },
 
   keyInput: function (e) {
     var that = this;
     console.log(e)
     const propertyName = e.currentTarget.id;
-    const teamInfo = Object.assign({}, this.data.teamInfo, { [propertyName]: e.detail.detail.value })
+    const postInfo = Object.assign({}, this.data.postInfo, { [propertyName]: e.detail.detail.value })
     console.log(propertyName)
-    console.log(teamInfo)
+    console.log(postInfo)
     that.setData({
-      teamInfo: teamInfo
+      postInfo: postInfo
     })
-    console.log(teamInfo)
-  }
+    console.log(postInfo)
+  },
+  toTeamInfo: function () {
+    wx.navigateTo({
+      url: '/pages/teamInfo/teamInfo'
+    })
+  },
+
+
 })

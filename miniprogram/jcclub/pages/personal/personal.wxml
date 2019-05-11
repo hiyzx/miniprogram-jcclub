@@ -2,9 +2,13 @@
 
 <view wx:if="{{hasUserInfo && hasUserInfoId}}">
   <i-card title="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}"></i-card>
-<i-button bind:click="myInfo" type="primary" shape="circle" size="small">我的信息</i-button>
-<i-button bind:click="myTeam" type="success" shape="circle" size="small">我的团队</i-button>
-<i-button bind:click="myDeliveryList" type="primary" shape="circle" size="small">我的投递</i-button>
-<i-button bind:click="otherDelivery" type="success" shape="circle" size="small">人才投递查看</i-button>
+<i-button bind:click="myTalentInfo" type="primary" shape="circle" size="small">我的人才信息</i-button>
+<i-button bind:click="myTeamInfo" type="success" shape="circle" size="small">我的团队信息</i-button>
+<i-button bind:click="myTeam" type="primary" shape="circle" size="small">我的招聘信息</i-button>
+<i-button bind:click="myDeliveryList" type="success" shape="circle" size="small">我的投递</i-button>
+<i-button bind:click="otherDelivery" type="primary" shape="circle" size="small">人才投递查看</i-button>
+</view>
+<view wx:if="{{isAdmin == 1 }}">
+<i-button bind:click="toApproval" type="success" shape="circle" size="small">内容审核</i-button>
 </view>
 

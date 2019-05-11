@@ -7,7 +7,6 @@
     <i-input value="{{talentInfo.workExperience}}" id='workExperience' type="textarea" title="工作经历" placeholder="请输入工作经历(最多200字)" maxlength="50" bindblur="keyInput"/>
     <i-input value="{{talentInfo.competitionExperience}}" id='competitionExperience' type="textarea" title="参赛经历" placeholder="请输入参赛经历(最多200字)" maxlength="50" bindblur="keyInput"/>
 </i-panel>
-
 <i-button bind:click="saveInfo" type="success" shape="circle" size="small" >保存</i-button>
 <view  wx:if="{{!talentInfo.isPublish}}">
     <i-button bind:click="publish" data-publish='{{1}}' type="primary" shape="circle" size="small" >发布到人才库</i-button>

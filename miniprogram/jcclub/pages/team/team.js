@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
       var that = this;
 
-      if (app.globalData.userInfo) {
+    if (app.globalData.hasUserInfo) {
           console.log(1)
           that.setData({
               userInfo: app.globalData.userInfo,
@@ -30,11 +30,18 @@ Page({
           })
       } else if (that.data.canIUse) {
           console.log(2)
+          if(app.globalData.userInfo){
+            this.setData({
+              userInfo: app.globalData.userInfo,
+              hasUserInfo: true
+            })
+          }
           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
           // 所以此处加入 callback 以防止这种情况
           app.userInfoReadyCallback = res => {
               console.log(12)
               app.globalData.userInfo = res.userInfo
+              app.globalData.hasUserInfo = true
               this.setData({
                   userInfo: res.userInfo,
                   hasUserInfo: true
@@ -46,6 +53,7 @@ Page({
           wx.getUserInfo({
               success: res => {
                   app.globalData.userInfo = res.userInfo
+                  app.globalData.hasUserInfo = true
                   this.setData({
                       userInfo: res.userInfo,
                       hasUserInfo: true
@@ -97,6 +105,7 @@ Page({
                     success: function (res) {
                         console.log(7);
                         app.globalData.userInfo = res.userInfo
+                        app.globalData.hasUserInfo = true
                         that.setData({
                             getUserInfoFail: false,
                             userInfo: res.userInfo,
@@ -113,6 +122,10 @@ Page({
                         })
                     }
                 })
+              if (code) {
+                console.log(code);
+                that.getOpenid(code);
+              }
             }
         })
     },
@@ -140,9 +153,10 @@ Page({
         console.log(5);
         console.log(e)
         if (e.detail.userInfo) {
+            const userInfo = e.detail.userInfo;
             app.globalData.userInfo = e.detail.userInfo
             that.setData({
-                userInfo: e.detail.userInfo,
+                userInfo: userInfo,
                 hasUserInfo: true
             })
         } else {
@@ -165,10 +179,10 @@ Page({
         // 发送保存微信信息的请求
         return new Promise(function (resolve, reject) {
             wx.request({
-                url: app.globalData.requestUri + '/personal?actionName=auth',
+                url: app.globalData.requestUri + '/personal?actionName=auth&openid=' + app.globalData.openid, 
                 data: that.data.userInfo,
                 success: function (res) {
-                    app.globalData.userId = res.data.data,
+                  app.globalData.userId = res.data.data.userInfoId,
                         that.setData({
                             hasUserInfoId: true
                         })
@@ -182,9 +196,20 @@ Page({
     this.onLoad();//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
   },
 
+  getOpenid: function (code) {
+    var that = this;
+    wx.request({
+      url: app.globalData.requestUri + '/personal?actionName=openid&code=' + code,
+      success: function (res) {
+        app.globalData.openid = res.data.data;
+      }
+    })
+  },
+
+
   toPublish: function(){
     wx.navigateTo({
-      url: '/pages/teamInfo/teamInfo'
+      url: '/pages/postInfo/postInfo'
     })
   },
 
@@ -192,7 +217,7 @@ Page({
     console.log(event.currentTarget.dataset)
     var that = this;
     wx.request({
-      url: app.globalData.requestUri + '/teamLibrary?actionName=delivery&userInfoId=' + app.globalData.userId + '&teamId=' + event.currentTarget.dataset.teamid,
+      url: app.globalData.requestUri + '/teamLibrary?actionName=delivery&userInfoId=' + app.globalData.userId + '&teamId=' + event.currentTarget.dataset.teamid + '&postId=' + event.currentTarget.dataset.postid,
       success: function (res) {
         if (res.data.resCode == '200') {
           if(res.data.data === 1){

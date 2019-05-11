@@ -15,8 +15,8 @@ App({
           wx.request({
             url: that.globalData.requestUri + '/personal?actionName=openid&code=' + res.code,
             success: function (res) {
-              const userInfo = Object.assign({}, that.globalData.userInfo, { ['openid']: res.data.data });
-              that.globalData.userInfo = userInfo;
+              that.globalData.openid = res.data.data
+              console.log('初始化小程序,获取openid ' + that.globalData.openid)
             }
           })
         }
@@ -47,6 +47,7 @@ App({
     requestUri: 'http://localhost:8080/jcclub',
     userInfo: null,
     userId: null,
-    hasUserInfo: false
+    hasUserInfo: false,
+    openid: null
   }
 })

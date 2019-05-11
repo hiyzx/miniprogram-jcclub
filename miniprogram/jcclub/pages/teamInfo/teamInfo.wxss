@@ -1,9 +1,1 @@
 /* pages/teamInfo/teamInfo.wxss */
-.list-msg .list-msg2 {
-    height: 60rpx;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #ccc;
-    padding: 0 10rpx;
-}

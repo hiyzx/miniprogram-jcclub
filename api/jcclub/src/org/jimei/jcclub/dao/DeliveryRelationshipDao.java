@@ -22,10 +22,11 @@ public class DeliveryRelationshipDao {
      * @date 2019/3/4
      * @description 保存
      */
-    public void save(Integer talentUserInfoId, Integer talentId, Integer teamId, Integer teamUserInfoId) {
+    public void save(Integer talentUserInfoId, Integer talentId, Integer teamId, Integer teamUserInfoId,
+            Integer postId) {
         try {
-            String sql = "INSERT INTO delivery_relationship (talentUserInfoId,talentId,teamId,teamUserInfoId,createTime) VALUES(?,?,?,?,?)";
-            DBUtil.getQr().update(sql, talentUserInfoId, talentId, teamId, teamUserInfoId, new Date());
+            String sql = "INSERT INTO delivery_relationship (talentUserInfoId,talentId,teamId,teamUserInfoId,postId,createTime) VALUES(?,?,?,?,?,?)";
+            DBUtil.getQr().update(sql, talentUserInfoId, talentId, teamId, teamUserInfoId, postId, new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +39,7 @@ public class DeliveryRelationshipDao {
      */
     public List<Integer> myDeliveryIdList(Integer talentUserInfoId) {
         List<DeliveryRelationship> deliveryRelationships = myDeliveryRelationshipList(talentUserInfoId);
-        return deliveryRelationships.stream().map(DeliveryRelationship::getTeamId).collect(Collectors.toList());
+        return deliveryRelationships.stream().map(DeliveryRelationship::getPostId).collect(Collectors.toList());
     }
 
     /**
@@ -61,10 +62,10 @@ public class DeliveryRelationshipDao {
      * @date 2019/3/4
      * @description 根据人才id和团队id查询数据
      */
-    public DeliveryRelationship queryByTalentIdAndTeamId(Integer talentId, Integer teamId) {
+    public DeliveryRelationship queryByTalentIdAndPostId(Integer talentId, Integer postId) {
         try {
-            String sql = "select * from delivery_relationship where talentId = ? AND teamId = ?";
-            return DBUtil.getQr().query(sql, new BeanHandler<>(DeliveryRelationship.class), talentId, teamId);
+            String sql = "select * from delivery_relationship where talentId = ? AND postId = ?";
+            return DBUtil.getQr().query(sql, new BeanHandler<>(DeliveryRelationship.class), talentId, postId);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

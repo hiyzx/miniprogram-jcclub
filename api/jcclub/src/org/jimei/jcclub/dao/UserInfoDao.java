@@ -3,6 +3,7 @@ package org.jimei.jcclub.dao;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.jimei.jcclub.model.dto.UserInfoDto;
 import org.jimei.jcclub.model.po.UserInfo;
+import org.jimei.jcclub.model.vo.UserInfoVo;
 import org.jimei.jcclub.utils.DBUtil;
 
 import java.util.Date;
@@ -19,17 +20,17 @@ public class UserInfoDao {
      * @date 2019/3/4
      * @description 新增或者更新用户信息
      */
-    public Integer auth(UserInfoDto userInfoDto) {
-        UserInfo userInfo = this.query(userInfoDto.getNickName());
+    public UserInfoVo auth(UserInfoDto userInfoDto) {
+        UserInfo userInfo = this.query(userInfoDto.getOpenid());
         if (userInfo == null) {
             // 新增
             this.save(userInfoDto);
-            return this.query(userInfoDto.getNickName()).getId();
+            userInfo = this.query(userInfoDto.getOpenid());
         } else {
             // 更新
             this.update(userInfo.getId(), userInfoDto);
-            return userInfo.getId();
         }
+        return UserInfoVo.of(userInfo.getId(), userInfo.getIsAdmin());
 
     }
 
@@ -38,9 +39,9 @@ public class UserInfoDao {
      * @date 2019/3/4
      * @description 根据用户昵称查询用户信息(因为openid还要做服务器关联,而且这个字段没有用到)
      */
-    public UserInfo query(String nickName) {
+    public UserInfo query(String openid) {
         try {
-            String sql = String.format("SELECT * FROM user_info WHERE nickName = '%s'", nickName);
+            String sql = String.format("SELECT * FROM user_info WHERE openid = '%s'", openid);
             return DBUtil.getQr().query(sql, new BeanHandler<>(UserInfo.class));
         } catch (Exception e) {
             e.printStackTrace();

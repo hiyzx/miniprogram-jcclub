@@ -29,7 +29,7 @@ Page({
     var that = this;
     console.log(event.currentTarget.dataset)
     wx.request({
-      url: app.globalData.requestUri + '/personal?actionName=publishMyTeam&teamId=' + event.currentTarget.dataset.teamid
+      url: app.globalData.requestUri + '/personal?actionName=publishMyPost&teamId=' + event.currentTarget.dataset.teamid
         + '&isPublish=' + event.currentTarget.dataset.ispublish,
       success: function (res) {
         if (res.data.resCode == '200') {

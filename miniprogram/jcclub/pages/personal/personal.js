@@ -9,6 +9,7 @@ Page({
    */
   data: {
     userInfo: {},
+    isAdmin: 0,
     hasUserInfo: false,
     getUserInfoFail: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -29,6 +30,12 @@ Page({
       })
     } else if (that.data.canIUse) {
       console.log(2)
+      if (app.globalData.userInfo) {
+        this.setData({
+          userInfo: app.globalData.userInfo,
+          hasUserInfo: true
+        })
+      }
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -91,6 +98,7 @@ Page({
             console.log(7);
             app.globalData.userInfo = res.userInfo
             app.globalData.hasUserInfo = true
+            console.log(res.userInfo)
             that.setData({
               getUserInfoFail: false,
               userInfo: res.userInfo,
@@ -139,8 +147,9 @@ Page({
     if (e.detail.userInfo) {
       console.log('不用授权')
       app.globalData.userInfo = e.detail.userInfo
+      console.log(app.globalData.userInfo)
       this.setData({
-        userInfo: e.detail.userInfo,
+        userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
     } else {
@@ -154,8 +163,7 @@ Page({
     wx.request({
       url: app.globalData.requestUri + '/personal?actionName=openid&code=' + code,
       success: function (res) {
-        const userInfo = Object.assign({}, that.data.userInfo, { ['openid']: res.data.data });
-        that.data.userInfo = userInfo;
+        app.globalData.openid = res.data.data;
       }
     })
   },
@@ -165,21 +173,28 @@ Page({
     console.log(JSON.stringify(this.data.userInfo))
     // 发送保存微信信息的请求
     wx.request({
-      url: app.globalData.requestUri + '/personal?actionName=auth', 
+      url: app.globalData.requestUri + '/personal?actionName=auth&openid=' + app.globalData.openid, 
       data: this.data.userInfo,
       success: function (res) {
-        app.globalData.userId = res.data.data,
+        console.log(res)
+        app.globalData.userId = res.data.data.userInfoId,
         that.setData({
-          hasUserInfoId: true
+          hasUserInfoId: true,
+          isAdmin: res.data.data.isAdmin
         })
       }
     }),
       console.log(that.data.hasUserInfoId)
       console.log(app.globalData.userId)
   },
-  myInfo: function(){
+  myTalentInfo: function(){
     wx.navigateTo({
       url: '/pages/personalInfo/personalInfo'
+    })
+  },
+  myTeamInfo: function () {
+    wx.navigateTo({
+      url: '/pages/teamInfo/teamInfo'
     })
   },
   myTeam: function () {
@@ -195,6 +210,11 @@ Page({
   otherDelivery: function () {
     wx.navigateTo({
       url: '/pages/otherDelivery/otherDelivery'
+    })
+  },
+  toApproval: function () {
+    wx.navigateTo({
+      url: '/pages/approval/approval'
     })
   }
 

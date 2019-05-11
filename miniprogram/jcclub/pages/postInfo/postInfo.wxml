@@ -1,0 +1,12 @@
+<i-panel>
+    <i-input value="{{talentInfo.type}}" id='type' title="岗位类型" placeholder="请输入岗位类型" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.post}}" id='post' title="岗位" placeholder="请输入岗位名称" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.salary}}" id='salary' title="薪资" placeholder="请输入薪资" bindblur="keyInput"/>
+    <i-input value="{{talentInfo.requirement}}" id='requirement' type="textarea" title="招聘要求" placeholder="请输入参招聘要求(最多200字)" maxlength="50" bindblur="keyInput"/>
+</i-panel>
+<view  wx:if="{{!teamId}}">
+    <i-button bind:click="toTeamInfo" type="success" shape="circle" size="small" >未填写团队信息,请先前往</i-button>
+</view>
+<view  wx:if="{{teamId}}">
+    <i-button bind:click="publish" type="success" shape="circle" size="small" >发布</i-button>
+</view>
