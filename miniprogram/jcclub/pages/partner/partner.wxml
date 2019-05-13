@@ -6,11 +6,5 @@
         <view slot="content">岗位类型：{{item.type}}</view>
         <view slot="content">工作经历：{{item.workExperience}}</view>
         <view slot="content">比赛经历：{{item.competitionExperience}}</view>
-        <view slot="content" wx:if="{{!item.isPartner}}">
-          <i-button bind:click="changePartner" data-talentId='{{item.id}}' data-isPartner='1'  type="info" shape="circle" size="small">添加为合伙人</i-button>
-        </view>
-         <view slot="content" wx:if="{{item.isPartner}}">
-          <i-button  bind:click="changePartner" data-talentId='{{item.id}}' data-isPartner='0' type="success" shape="circle" size="small">取消合伙人</i-button>
-        </view>
     </i-card>
 </view>

@@ -207,6 +207,11 @@ Page({
       url: '/pages/myDeliveryList/myDeliveryList'
     })
   },
+  myPartner: function () {
+    wx.navigateTo({
+      url: '/pages/partner/partner'
+    })
+  },
   otherDelivery: function () {
     wx.navigateTo({
       url: '/pages/otherDelivery/otherDelivery'

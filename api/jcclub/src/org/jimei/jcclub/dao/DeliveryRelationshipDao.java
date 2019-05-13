@@ -87,4 +87,33 @@ public class DeliveryRelationshipDao {
             return Collections.emptyList();
         }
     }
+
+    /**
+     * @author yezhaoxing
+     * @date 2019/5/13
+     * @description 修改合伙人状态
+     */
+    public void addPartner(Integer userInfoId, Integer talentId, Integer isPartner) {
+        try {
+            String sql = "UPDATE delivery_relationship SET isPartner = ? WHERE teamUserInfoId= ? AND talentId = ?";
+            DBUtil.getQr().update(sql, isPartner, userInfoId, talentId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * @author yexiaoling
+     * @date 2019/3/4
+     * @description 查询合伙人状态
+     */
+    public List<DeliveryRelationship> queryDeliveryRelationshipList(Integer teamUserInfoId) {
+        try {
+            String sql = "select DISTINCT(talentId) from delivery_relationship where teamUserInfoId = ? AND isPartner = 1";
+            return DBUtil.getQr().query(sql, new BeanListHandler<>(DeliveryRelationship.class), teamUserInfoId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 }

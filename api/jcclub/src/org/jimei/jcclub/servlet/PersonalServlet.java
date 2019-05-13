@@ -1,5 +1,6 @@
 package org.jimei.jcclub.servlet;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.jimei.jcclub.dao.DeliveryRelationshipDao;
 import org.jimei.jcclub.dao.TalentDao;
 import org.jimei.jcclub.dao.TeamDao;
@@ -7,6 +8,7 @@ import org.jimei.jcclub.dao.UserInfoDao;
 import org.jimei.jcclub.model.dto.UserInfoDto;
 import org.jimei.jcclub.model.po.DeliveryRelationship;
 import org.jimei.jcclub.model.po.Talent;
+import org.jimei.jcclub.model.vo.TalentVo;
 import org.jimei.jcclub.model.vo.TeamVo;
 import org.jimei.jcclub.model.vo.UserInfoVo;
 import org.jimei.jcclub.utils.WxUtil;
@@ -53,6 +55,12 @@ public class PersonalServlet extends BaseServletFactory {
         } else if ("approval".equals(actionName)) {
             System.out.println("审批团队信息");
             return this.approval(request);
+        } else if ("addPartner".equals(actionName)) {
+            System.out.println("修改合伙人");
+            return this.addPartner(request);
+        } else if ("myPartner".equals(actionName)) {
+            System.out.println("查询我的合伙人");
+            return this.queryMyPartner(request);
         } else {
             throw new RuntimeException("actionName不能为空");
         }
@@ -72,7 +80,7 @@ public class PersonalServlet extends BaseServletFactory {
         userInfo.setNickName(parameterMap.get("nickName")[0]);
         userInfo.setGender(Integer.valueOf(parameterMap.get("gender")[0]));
         userInfo.setOpenid(parameterMap.get("openid")[0]);
-        return  new UserInfoDao().auth(userInfo);
+        return new UserInfoDao().auth(userInfo);
     }
 
     // 查询我的投递记录
@@ -102,10 +110,17 @@ public class PersonalServlet extends BaseServletFactory {
             System.out.println("投递记录表为空");
             return Collections.emptyList();
         } else {
-            List<Talent> talents = new ArrayList<>(deliveryRelationships.size());
+            List<TalentVo> talents = new ArrayList<>(deliveryRelationships.size());
             deliveryRelationships.forEach(deliveryRelationship -> {
                 Talent talent = new TalentDao().queryById(deliveryRelationship.getTalentId());
-                talents.add(talent);
+                TalentVo talentVo = new TalentVo();
+                try {
+                    BeanUtils.copyProperties(talentVo, talent);
+                    talentVo.setIsPartner(deliveryRelationship.getIsPartner());
+                    talents.add(talentVo);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             });
             return talents;
         }
@@ -135,9 +150,29 @@ public class PersonalServlet extends BaseServletFactory {
     }
 
     // 查询所有已发布的岗位
-    private List<TeamVo> queryPost(HttpServletRequest request){
+    private List<TeamVo> queryPost(HttpServletRequest request) {
         return new TeamDao().list(1);
     }
 
+    private Object addPartner(HttpServletRequest request) {
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        Integer isPartner = Integer.valueOf(request.getParameter("isPartner"));
+        Integer talentId = Integer.valueOf(request.getParameter("talentId"));
+        new DeliveryRelationshipDao().addPartner(userInfoId, talentId, isPartner);
+        return true;
+    }
+
+    private Object queryMyPartner(HttpServletRequest request) {
+        Integer userInfoId = Integer.valueOf(request.getParameter("userInfoId"));
+        List<DeliveryRelationship> deliveryRelationships = new DeliveryRelationshipDao()
+                .queryDeliveryRelationshipList(userInfoId);
+        List<Talent> talents = new ArrayList<>(deliveryRelationships.size());
+        for (DeliveryRelationship deliveryRelationship : deliveryRelationships) {
+            Integer talentId = deliveryRelationship.getTalentId();
+            Talent talent = new TalentDao().queryById(talentId);
+            talents.add(talent);
+        }
+        return talents;
+    }
 
 }

@@ -1,14 +1,14 @@
-<i-panel>
-    <i-input value="{{teamInfo.teamName}}" id='teamName' title="团队名称" autofocus placeholder="请输入团队名称" bindblur="keyInput"/>
-    <i-input value="{{teamInfo.tel}}" id='tel' type="number" title="联系电话" placeholder="请输入联系电话" bindblur="keyInput"/>
-    <i-input value="{{teamInfo.briefIntro}}" id='briefIntro' type="textarea" title="团队简介" placeholder="请输入团队简介(最多200字)" maxlength="50" bindblur="keyInput"/>
-    <i-input value="{{teamInfo.place}}" id='place' title="工作地点" placeholder="请输入工作地点" bindblur="keyInput"/>
-</i-panel>
 
+      <i-panel>
+        <i-input value="{{teamInfo.teamName}}" id='teamName' title="团队名称" autofocus placeholder="请输入团队名称" bindblur="keyInput"/>
+        <i-input value="{{teamInfo.tel}}" id='tel' type="number" title="联系电话" placeholder="请输入联系电话" bindblur="keyInput"/>
+        <i-input value="{{teamInfo.briefIntro}}" id='briefIntro' type="textarea" title="团队简介" placeholder="请输入团队简介(最多200字)" maxlength="50" bindblur="keyInput"/>
+        <i-input value="{{teamInfo.place}}" id='place' title="工作地点" placeholder="请输入工作地点" bindblur="keyInput"/>
+      </i-panel>
+      <view  wx:if="{{teamInfo.id}}">
+          <i-button bind:click="publish" type="success" shape="circle" size="small" >修改</i-button>
+      </view>
+      <view  wx:if="{{!teamInfo.id}}">
+          <i-button bind:click="publish" type="success" shape="circle" size="small" >发布</i-button>
+      </view>
 
-<view  wx:if="{{teamInfo.id}}">
-    <i-button bind:click="publish" type="success" shape="circle" size="small" >修改</i-button>
-</view>
-<view  wx:if="{{!teamInfo.id}}">
-    <i-button bind:click="publish" type="success" shape="circle" size="small" >发布</i-button>
-</view>

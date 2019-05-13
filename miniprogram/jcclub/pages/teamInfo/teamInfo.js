@@ -8,7 +8,8 @@ Page({
    */
   data: {
      teamInfo:{
-     }
+    },
+    current: 'teamInfo'
   },
 
   /**
@@ -58,5 +59,10 @@ Page({
       teamInfo: teamInfo
     })
     console.log(teamInfo)
+  },
+  handleChange({ detail }) {
+    this.setData({
+      current: detail.key
+    });
   }
 })

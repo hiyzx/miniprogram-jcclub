@@ -2,6 +2,8 @@
   "usingComponents": {
     "i-input": "../../iview/input/index",
     "i-button": "../../iview/button/index",
-    "component-select": "../select/select"
+    "component-select": "../select/select",
+    "i-tab-bar": "../../iview/tab-bar/index",
+    "i-tab-bar-item": "../../iview/tab-bar-item/index"
   }
 }

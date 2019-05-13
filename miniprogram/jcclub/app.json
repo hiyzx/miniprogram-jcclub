@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/team/team",
     "pages/teamInfo/teamInfo",
@@ -12,13 +12,14 @@
     "pages/otherDelivery/otherDelivery",
     "pages/select/select",
     "pages/approval/approval",
+    "pages/partner/partner",
     "pages/out/out"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "高校创新赛事对接平台",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#9B9DB1",
@@ -51,5 +52,6 @@
         "text": "个人中心"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

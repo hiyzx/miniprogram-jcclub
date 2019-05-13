@@ -20,6 +20,8 @@ public class DeliveryRelationship {
 
     private Integer postId;
 
+    private Integer isPartner;
+
     private Date createTime;
 
     public Integer getId() {
@@ -68,6 +70,14 @@ public class DeliveryRelationship {
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    public Integer getIsPartner() {
+        return isPartner;
+    }
+
+    public void setIsPartner(Integer isPartner) {
+        this.isPartner = isPartner;
     }
 
     public Date getCreateTime() {

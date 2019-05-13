@@ -23,5 +23,22 @@ Page({
         })
       }
     })
+  },
+  changePartner:function(event){
+    console.log(event)
+    var that = this;
+    wx.request({
+      url: app.globalData.requestUri + '/personal?actionName=addPartner&userInfoId=' + app.globalData.userId
+        + '&talentId=' + event.target.dataset.talentid + '&isPartner=' + event.target.dataset.ispartner,
+      success: function (res) {
+        wx.showToast({
+          title: '变更成功',
+          icon: 'succes',
+          duration: 2000,
+          mask: true
+        })
+        that.onLoad();
+      }
+    })
   }
 })
