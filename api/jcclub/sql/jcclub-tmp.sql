@@ -1,3 +1,18 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : 腾讯
+ Source Server Type    : MySQL
+ Source Server Version : 50724
+ Source Host           : www.hiyzx.cn:3306
+ Source Schema         : jcclub-tmp
+
+ Target Server Type    : MySQL
+ Target Server Version : 50724
+ File Encoding         : 65001
+
+ Date: 13/05/2019 23:21:32
+*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -44,9 +59,9 @@ CREATE TABLE `carousel_map` (
 -- Records of carousel_map
 -- ----------------------------
 BEGIN;
-INSERT INTO `carousel_map` VALUES (1, 1, 'http://s2397a5562.zicp.vip:20826/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE1.jpg', 1, '2019-02-19');
-INSERT INTO `carousel_map` VALUES (2, 2, 'http://s2397a5562.zicp.vip:20826/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE2.jpg', 1, '2019-02-19');
-INSERT INTO `carousel_map` VALUES (3, 3, 'http://s2397a5562.zicp.vip:20826/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE3.jpg', 1, '2019-02-19');
+INSERT INTO `carousel_map` VALUES (1, 1, 'http://localhost:8080/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE1.jpg', 1, '2019-02-19');
+INSERT INTO `carousel_map` VALUES (2, 2, 'http://localhost:8080/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE2.jpg', 1, '2019-02-19');
+INSERT INTO `carousel_map` VALUES (3, 3, 'http://localhost:8080/jcclub/img/%E8%BD%AE%E6%92%AD%E5%9B%BE3.jpg', 1, '2019-02-19');
 COMMIT;
 
 -- ----------------------------
@@ -60,6 +75,7 @@ CREATE TABLE `delivery_relationship` (
   `teamId` int(11) DEFAULT NULL COMMENT '团队库id',
   `teamUserInfoId` int(11) DEFAULT NULL COMMENT '团队创建人id',
   `postId` int(11) DEFAULT NULL COMMENT '岗位id',
+  `isPartner` int(4) DEFAULT '0' COMMENT '是否合伙人0不是1是',
   `createTime` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -68,8 +84,8 @@ CREATE TABLE `delivery_relationship` (
 -- Records of delivery_relationship
 -- ----------------------------
 BEGIN;
-INSERT INTO `delivery_relationship` VALUES (1, 5, 10, 7, 4, NULL, '2019-03-15');
-INSERT INTO `delivery_relationship` VALUES (5, 12, 8, 7, 8, 1, '2019-05-10');
+INSERT INTO `delivery_relationship` VALUES (1, 5, 10, 7, 4, NULL, 0, '2019-03-15');
+INSERT INTO `delivery_relationship` VALUES (5, 12, 8, 7, 8, 1, 1, '2019-05-10');
 COMMIT;
 
 -- ----------------------------
