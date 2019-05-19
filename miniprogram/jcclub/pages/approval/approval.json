@@ -1,6 +1,8 @@
 {
   "usingComponents": {
+    "i-input": "../../iview/input/index",
     "i-card": "../../iview/card/index",
-    "i-button": "../../iview/button/index"
+    "i-button": "../../iview/button/index",
+    "i-modal": "../../iview/modal/index"
   }
 }

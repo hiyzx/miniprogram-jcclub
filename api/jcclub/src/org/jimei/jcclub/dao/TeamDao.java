@@ -62,11 +62,12 @@ public class TeamDao {
     // 以下是对post_requirement表的操作
     public void save(PostRequirementDto postRequirementDto) {
         try {
-            String sql = "INSERT INTO post_requirement (userInfoId,teamId, post ,type,salary,requirement,createTime) "
-                    + "VALUES (?,?,?,?,?,?,?)";
+            String sql =
+                    "INSERT INTO post_requirement (userInfoId,teamId, post ,type,salary,requirement,isPublish,createTime) "
+                            + "VALUES (?,?,?,?,?,?,?,?)";
             DBUtil.getQr().update(sql, postRequirementDto.getUserInfoId(), postRequirementDto.getTeamId(),
                     postRequirementDto.getPost(), postRequirementDto.getType(), postRequirementDto.getSalary(),
-                    postRequirementDto.getSalary(), 0, new Date());
+                    postRequirementDto.getRequirement(), 1, new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }

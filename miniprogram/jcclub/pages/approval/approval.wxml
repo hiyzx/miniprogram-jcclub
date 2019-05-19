@@ -9,7 +9,15 @@
         <view slot="content">地点：{{item.place}}</view>
         <view slot="content" wx:if="{{item.approvalStatus == 0}}">
           <i-button bind:click="approval" data-postId='{{item.id}}' data-approvalStatus='1'  type="info" shape="circle" size="small">审批通过</i-button>
-          <i-button bind:click="approval" data-postId='{{item.id}}' data-approvalStatus='2'  type="success" shape="circle" size="small">审批拒绝</i-button>
-        </view>
+          <i-button bind:click="openModel" data-postId='{{item.id}}' type="error" shape="circle" size="small">审批拒绝</i-button>
+        </view>    
     </i-card>
 </view>
+
+
+<i-modal title="请输入拒绝原因" visible="{{visible}}" bind:ok="approvalReject" bind:cancel="handleClose">
+    <view >
+      <i-input id='remark' autofocus placeholder="请输入原因" bindblur="keyInput"/>
+    </view>
+</i-modal>
+
