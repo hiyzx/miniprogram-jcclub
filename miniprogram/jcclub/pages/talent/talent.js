@@ -23,5 +23,8 @@ Page({
               })
           }
       })
+  },
+  onShow: function () {
+    this.onLoad();
   }
 })
